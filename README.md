@@ -1,4 +1,5 @@
 # Overlook
+For this project, you will be building a hotel management tool for hotel customers and staff to manage room bookings and calculate customer bills.
 
 ## Setup
 
