@@ -12,6 +12,7 @@ $button-slide-transition: background-color .2s, transform .2s;
 @mixin centered() {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 // Webpage //
@@ -26,6 +27,7 @@ html, body {
 
 body {
   @include centered();
+  flex-direction: column;
 }
 
 // Header/nav:
@@ -53,7 +55,6 @@ header {
 
 #user-nav {
   @include centered();
-  align-items: center;
 }
 
 .arrowhead {
@@ -62,4 +63,11 @@ header {
 
 #overlook-logo {
   width: 150px;
+}
+
+
+// HIDDEN
+
+.hidden {
+  display: none !important;
 }
