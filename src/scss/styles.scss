@@ -1,0 +1,73 @@
+// Color Palette:
+$red: #D24848;
+$navy: #3B3B6B;
+
+// Fonts:
+$title-font: 'Montserrat', sans-serif;
+
+// Transitions:
+$button-slide-transition: background-color .2s, transform .2s;
+
+// Center:
+@mixin centered() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Webpage //
+
+* {
+  font-family: $title-font;
+}
+
+html, body {
+  height: 100;
+}
+
+body {
+  @include centered();
+  flex-direction: column;
+}
+
+// Header/nav:
+
+header {
+  width: 80%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  button {
+    // @include centered();
+    transition: $button-slide-transition;
+    border: none;
+    // height: 20px;
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(230, 229, 229);
+    }
+  }
+}
+
+#user-nav {
+  @include centered();
+}
+
+.arrowhead {
+  width: 15px;
+}
+
+#overlook-logo {
+  width: 150px;
+}
+
+
+// HIDDEN
+
+.hidden {
+  display: none !important;
+}
