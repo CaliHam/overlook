@@ -12,7 +12,7 @@ let currentBookings;
 let bookedRooms;
 
 window.onload = () => {
-    getData('customers/1')
+    getData('customers/45')
     .then(response => {
         currentCustomer = response
         getCurrentBookings(currentCustomer)
