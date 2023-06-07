@@ -11,6 +11,7 @@ import { getData } from './apiCalls';
 // Any room bookings I have made (past or upcoming)
 // The total amount I have spent on rooms
 let currentCustomer;
+let currentBookings;
 // step 1: get customer
     // usually this would be retrieved from the user logging in. 
     // for now, we will use http://localhost:3001/api/v1/customers/<id> where<id> will be a number of a customer’s id
@@ -20,17 +21,22 @@ window.onload = () => {
     .then(response => {
         currentCustomer = response
         console.log(currentCustomer)
+        getCurrentBookings(currentCustomer)
     })
 }
 
-
-
 // step 2: get bookings
-    // bookings have a key where the userID will match the customer.id
+    // the bookings have a key where the userID will match the customer.id
     // iterate through all bookings.userID to filter the ids that match
     // return an array of booking objects matching criteria
 
-
+const getCurrentBookings = (currentCustomer) => {
+    getData('bookings')
+    .then(response => {
+        currentBookings = response.bookings.filter(booking => booking.userID === currentCustomer.id)
+        console.log(currentBookings)
+    })
+}
 
 // step 3: display filtered bookings in table
     // in dom updates
