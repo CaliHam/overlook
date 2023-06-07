@@ -5,7 +5,7 @@ import './scss/styles.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData } from './apiCalls';
-import { displayBookings, getTotalCost } from './DOM-updates'
+import { displayBookings } from './DOM-updates'
 
 // I should see a dashboard page that shows me:
 // Any room bookings I have made (past or upcoming)
@@ -59,14 +59,22 @@ const getBookedRooms = (currentBookings) => {
             return foundRooms
         }, [])
         console.log('booked rooms', bookedRooms)
-        // update the table with each cost per night (dom/newfunction)
-        // getTotalCost(bookedRooms)
+        // update the table with each cost per night (dom/newfunction = displayCosts)
+        console.log(getTotalCost(bookedRooms))
     })
 }
 
-// const getTotalCost = (rooms) => {
-//     
-// }
+const getTotalCost = (rooms) => {
+    const totalCost = rooms.reduce((cost, currRoom) => {
+        cost += currRoom.costPerNight;
+        return cost
+    }, 0)
+    const formattedCost = totalCost.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
+    return formattedCost
+}
 
 // step 5: display all data in table and style it
 

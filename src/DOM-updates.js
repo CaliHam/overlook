@@ -12,6 +12,10 @@ const displayBookings = (bookings) => {
     })
 }
 
+// const displayCosts = () => {
+
+// }
+
 
 
 export {
