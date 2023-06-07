@@ -1,4 +1,5 @@
-const bookingTable = document.querySelector('#customer-bookings')
+const bookingTable = document.querySelector('#customer-bookings');
+// const totalCost = document.querySelector('#total-cost')
 
 const displayBookings = (bookings) => {
     bookings.forEach(booking => {
@@ -11,6 +12,9 @@ const displayBookings = (bookings) => {
     })
 }
 
+
+
 export {
-    displayBookings
+    displayBookings,
+
 }
