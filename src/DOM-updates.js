@@ -1,4 +1,4 @@
-const bookingTable = document.querySelector('#customer-bookings');
+const bookingTable = document.querySelector('#booking-info');
 const totalCost = document.querySelector('#total-cost')
 
 const displayBookings = (bookings, rooms) => {
@@ -13,8 +13,7 @@ const displayBookings = (bookings, rooms) => {
 }
 
 const displayTotal = (cost) => {
-    console.log(cost)
-    totalCost.innerText = `${cost}`
+    totalCost.innerHTML = `<b>${cost}</b>`
 }
 
 
