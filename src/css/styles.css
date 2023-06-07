@@ -1,3 +1,13 @@
-body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+/* Color Palette:
+Red: #D24848
+Text/Navy: #3B3B6B
+*/
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+  height: 100;
+  /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
 }
