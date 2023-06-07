@@ -1,7 +1,7 @@
 const roomRequest = {
     "rooms": [
         {
-        "number": 1,
+        "number": 15,
         "roomType": "residential suite",
         "bidet": true,
         "bedSize": "queen",
@@ -9,7 +9,7 @@ const roomRequest = {
         "costPerNight": 358.4
         },
         {
-        "number": 2,
+        "number": 24,
         "roomType": "suite",
         "bidet": false,
         "bedSize": "full",
@@ -17,7 +17,7 @@ const roomRequest = {
         "costPerNight": 477.38
         },
         {
-        "number": 3,
+        "number": 12,
         "roomType": "single room",
         "bidet": false,
         "bedSize": "king",
