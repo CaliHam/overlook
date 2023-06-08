@@ -1,6 +1,7 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 import './scss/styles.scss';
+import dayjs from 'dayjs';
 
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
@@ -78,16 +79,16 @@ const getTotalCost = (rooms) => {
 
 const checkAvailability = (date) => {
 	const formattedDate = dayjs(date).format('YYYY/MM/DD')
-	console.log(formattedDate)
-	
-	// iterate through allBookings dates
-	// if the booking.date matches what i chose, do not return that room number
-	// allRooms = rooms.length
-	// if(inputDate === booking[i].date){ 
-	// 	const i = allRooms.indexOf(booking[i].roomNumber)
-	// 	allRooms.splice(i, 1)
-	// 	return allRooms
-	// }
+	const allRoomNumbers = allRooms.map(room => room.number)
+	const unavailableRooms = allBookings.filter(booking => booking.date === formattedDate).map(room => room.roomNumber)
+	const roomsReady = allRoomNumbers.filter(room => !unavailableRooms.includes(room))
+	console.log(roomsReady)
+	const availableRooms = roomsReady.reduce((acc, currNum) => {
+		let foundRoom = allRooms.find(room => room.number === currNum)
+		acc.push(foundRoom)
+		return acc
+	},[])
+	console.log(availableRooms)
 }
 
 
