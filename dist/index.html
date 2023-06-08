@@ -13,39 +13,36 @@
   <body>
     <header>
       <img id="overlook-logo" src="./images/Overlook-logo.png" alt="Overlook Logo">
-      <nav id="user-nav">
-        <button id="dashboard">Username<img class="arrowhead" src="./images/arrowhead.png"></button>
-        <button>Nani</button>
+      <nav id="user-nav" class="dropdown">
+        <div id="user-menu" class="drop-container"><p class="user">Username</p><img class="arrowhead" src="./images/arrowhead.png">
+          <ul class="dropdown-content">
+            <button>My Dashboard</button>
+            <button>New Booking</button>
+          </ul>
+        </div>
       </nav>
     </header>
     <main>
-      <section id="home-view">
-        <!-- calendar -->
+      <section id="booking-view" class="hidden">
+        <!-- calendar and stuff-->
       </section>
-      <section id="dashboard-view" >
-        <!-- Any room bookings I have made (past or upcoming)
-        The total amount I have spent on rooms -->
-        <!-- a table to hold this information could be dope -->
-        <table>
-          <tr>
-            <th>Bookings</th>
-            <th>Date</th>
-            <th>Cost</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2023/02/14</td>
-            <td>$314</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2023/04/20</td>
-            <td>$195</td>
-          </tr>
+      <section id="dashboard-view">
+        <h2>My Dashboard</h2>
+        <table id="customer-bookings">
+          <thead>
+            <tr>
+              <th>Room #</th>
+              <th>Date</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody id="booking-info">
+            <!-- booking info goes here -->
+          </tbody>
           <tfoot>
             <th>Total Cost</th>
             <td></td>
-            <td>$1,000</td>
+            <td id="total-cost"></td>
           </tfoot>
         </table>
       </section>
