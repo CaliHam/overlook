@@ -1,3 +1,5 @@
+@import '~js-datepicker/src/datepicker';
+
 // Color Palette:
 $red: #D24848;
 $navy: #3B3B6B;
@@ -174,6 +176,34 @@ h1, h2 {
 
 h2 {
   font-size: 2em;
+}
+
+#booking-view {
+  @include centered();
+  flex-direction: column;
+}
+
+#date-picker {
+  @include centered();
+  background-color: $navy;
+  max-width: 600px;
+  color: #ffffff;
+  padding: 10px;
+
+  button {
+    border: $red;
+    color: #ffffff;
+    border-radius: 10px;
+    border-style: groove;
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+      border: $navy;
+      border-style: inset;
+      background-color: $red;
+    }
+  }
 }
 
 

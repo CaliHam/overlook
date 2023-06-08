@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-
+import datepicker from 'js-datepicker';
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
@@ -9,6 +9,7 @@ const dashView = document.querySelector('#dashboard-view')
 const bookingView = document.querySelector('#booking-view')
 const dashBtn = document.querySelector('#dash-btn')
 const bookingBtn = document.querySelector('#book-btn')
+const calendar = document.querySelector('#calendar')
 
 // EVENT LISTENERS
 
@@ -21,6 +22,9 @@ bookingBtn.addEventListener('click', () => {
 	hideAllPages()
 	bookingView.classList.remove('hidden')
 })
+
+// Date Picker //
+const picker = datepicker(calendar)
 
 // CODE
 
