@@ -5,12 +5,15 @@ import './scss/styles.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
-import { getData } from './apiCalls';
+import { getData, getAllData } from './apiCalls';
 import { displayBookings, displayTotal, displayUsername } from './DOM-updates'
 
 let currentCustomer;
 let currentBookings;
 let bookedRooms;
+let allCustomers;
+let allBookings;
+let allRooms;
 
 window.onload = () => {
 	getData('customers/20')
@@ -19,7 +22,16 @@ window.onload = () => {
 			getCurrentBookings(currentCustomer)
 			displayUsername(currentCustomer)
 	})
+	setData();
 }
+
+const setData = () => {
+  getAllData().then(data => {
+    allCustomers = data[0].customers;
+    allBookings = data[1].bookings;
+    allRooms = data[2].rooms;
+  });
+};
 
 // DASHBOARD VIEW
 
@@ -57,7 +69,28 @@ const getTotalCost = (rooms) => {
 	return formattedCost
 }
 
+// ✅ I should be able to select a date for which I’d like to book a room for myself
+// Upon selecting a date, I should be shown a list of room details for only rooms that are available on that date
+// I should be able to filter the list of available rooms by their roomType property
+// I should be able to select a room for booking
+// In the event that no rooms are available for the date/roomType selected, display a message fiercely 
+// apologizing to the user and asking them to adjust their room search
 
-// export {
+const checkAvailability = (date) => {
+	const formattedDate = dayjs(date).format('YYYY/MM/DD')
+	console.log(formattedDate)
+	
+	// iterate through allBookings dates
+	// if the booking.date matches what i chose, do not return that room number
+	// allRooms = rooms.length
+	// if(inputDate === booking[i].date){ 
+	// 	const i = allRooms.indexOf(booking[i].roomNumber)
+	// 	allRooms.splice(i, 1)
+	// 	return allRooms
+	// }
+}
 
-// }
+
+export {
+	checkAvailability
+}

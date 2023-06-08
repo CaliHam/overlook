@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
+import { checkAvailability } from './scripts.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
@@ -10,6 +11,10 @@ const bookingView = document.querySelector('#booking-view')
 const dashBtn = document.querySelector('#dash-btn')
 const bookingBtn = document.querySelector('#book-btn')
 const calendar = document.querySelector('#calendar')
+const checkDateBtn = document.querySelector('#check-date')
+
+// Date Picker //
+const picker = datepicker(calendar)
 
 // EVENT LISTENERS
 
@@ -23,8 +28,10 @@ bookingBtn.addEventListener('click', () => {
 	bookingView.classList.remove('hidden')
 })
 
-// Date Picker //
-const picker = datepicker(calendar)
+checkDateBtn.addEventListener('click', (e) => {
+	e.preventDefault()
+	checkAvailability(calendar.value)
+})
 
 // CODE
 
@@ -63,8 +70,9 @@ const displayTotal = (cost) => {
 
 
 
+
 export {
-    displayBookings,
-    displayTotal,
-    displayUsername
+	displayBookings,
+	displayTotal,
+	displayUsername
 }

@@ -9,11 +9,16 @@ const getData = (data) => {
     .catch(err => console.log(err))
 };
 
+const getAllData = () => {
+    return Promise.all([ getData('customers'), getData('bookings'), getData('rooms') ]);
+};
+
 // const postData 
 
 
 
 
 export {
-    getData
+    getData,
+    getAllData
 }
