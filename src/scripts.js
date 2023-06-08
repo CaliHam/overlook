@@ -5,17 +5,18 @@ import './scss/styles.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData } from './apiCalls';
-import { displayBookings, displayTotal } from './DOM-updates'
+import { displayBookings, displayTotal, displayUsername } from './DOM-updates'
 
 let currentCustomer;
 let currentBookings;
 let bookedRooms;
 
 window.onload = () => {
-    getData('customers/45')
+    getData('customers/20')
     .then(response => {
         currentCustomer = response
         getCurrentBookings(currentCustomer)
+        displayUsername(currentCustomer)
     })
 }
 

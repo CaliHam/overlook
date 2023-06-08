@@ -1,6 +1,11 @@
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
 const totalCost = document.querySelector('#total-cost')
+const userMenu = document.querySelector('.user')
+
+const displayUsername = (user) => {
+    userMenu.innerText = user.name
+}
 
 const displayBookings = (bookings, rooms) => {
     if(!bookings){
@@ -30,5 +35,6 @@ const displayTotal = (cost) => {
 
 export {
     displayBookings,
-    displayTotal
+    displayTotal,
+    displayUsername
 }
