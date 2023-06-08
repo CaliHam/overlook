@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+
+
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
 const totalCost = document.querySelector('#total-cost')
@@ -16,7 +19,7 @@ dashBtn.addEventListener('click', () => {
 
 bookingBtn.addEventListener('click', () => {
 	hideAllPages()
-	bookingBtn.classList.remove('hidden')
+	bookingView.classList.remove('hidden')
 })
 
 // CODE
@@ -44,7 +47,7 @@ const displayBookings = (bookings, rooms) => {
 		bookingTable.innerHTML += `
 			<tr id="${booking.id}">
 				<td>${booking.roomNumber}</td>
-				<td>${booking.date}</td>
+				<td>${dayjs(booking.date).format('MMMM D, YYYY')}</td>
 				<td>$${rooms[i].costPerNight}</td>
 			</tr>`
 	})

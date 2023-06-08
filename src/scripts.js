@@ -2,6 +2,7 @@
 // Do not delete or rename this file ********
 import './scss/styles.scss';
 
+
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData } from './apiCalls';

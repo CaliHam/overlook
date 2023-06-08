@@ -136,7 +136,7 @@ main {
   flex-direction: column;
 }
 
-h2 {
+h1, h2 {
   color: $navy;
   text-shadow: 5px 5px 0px #e7e7f0d2, 5px 4px 0px rgba(0,0,0,0.15);
   text-align: center;
@@ -144,11 +144,10 @@ h2 {
 }
 
 #customer-bookings {
-  align-self: center;
   border-collapse: collapse;
   margin-bottom: 60px;
   font-size: 0.9em;
-  min-width: 400px;
+  min-width: 450px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
   th {
@@ -169,6 +168,12 @@ h2 {
   tr:last-of-type {
     border-bottom: 2px solid $red;
   }
+}
+
+// NEW BOOKING VIEW
+
+h2 {
+  font-size: 2em;
 }
 
 
