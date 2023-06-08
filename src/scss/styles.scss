@@ -1,6 +1,7 @@
 // Color Palette:
 $red: #D24848;
 $navy: #3B3B6B;
+$clear-navy: rgba(50, 50, 100, 0.612);
 
 // Fonts:
 $title-font: 'Montserrat', sans-serif;
@@ -40,21 +41,68 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  button {
-    transition: $button-slide-transition;
-    border: none;
-    background-color: transparent;
-
-    &:hover {
-      cursor: pointer;
-      background-color: rgb(238, 238, 238);
-    }
-  }
 }
 
 #user-nav {
-  @include centered();
+  overflow: hidden;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropbtn {
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  background-color: inherit;
+  margin: 0;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $clear-navy;
+    color: #ffffff;
+    transition: $button-slide-transition;
+  }
+
+  &:hover .dropdown-content {
+    display: block;
+    cursor: pointer;
+    transition: $button-slide-transition;
+  }
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  border-radius: 10px;
+  background-color: $clear-navy;
+  color: #ffffff;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding-inline-start: 20px;
+
+  button {
+    display: block;
+    background-color: transparent;
+    color: #ffffff;
+    float: none;
+    align-self: center;
+    border: none;
+    padding: 10px 12px;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+      display: block;
+      background-color: $clear-navy;
+      transition: $button-slide-transition;
+    }
+  }
 }
 
 .arrowhead {
