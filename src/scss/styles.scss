@@ -8,8 +8,13 @@ $clear-navy: rgba(50, 50, 100, 0.612);
 // Fonts:
 $title-font: 'Montserrat', sans-serif;
 
-// Transitions:
-$button-slide-transition: background-color .2s, transform .2s;
+// Transition:
+// $button-hover: background-color .2s, transform .2s;
+@mixin button-hover() {
+  cursor: pointer; 
+  transform: scale(1.1);
+  transition: .2s ease;
+} 
 
 // Center:
 @mixin centered() {
@@ -70,16 +75,15 @@ header {
   }
 
   &:hover {
-    cursor: pointer;
     background-color: $clear-navy;
     color: #ffffff;
-    transition: $button-slide-transition;
+    cursor: pointer;
   }
 
   &:hover .dropdown-content {
     display: block;
     cursor: pointer;
-    transition: $button-slide-transition;
+    transition: .2s ease;
   }
 }
 
@@ -106,10 +110,9 @@ header {
     text-decoration: none;
 
     &:hover {
-      cursor: pointer;
       display: block;
       color: $navy;
-      transition: $button-slide-transition;
+      @include button-hover()
     }
   }
 }
@@ -189,6 +192,7 @@ h2 {
   max-width: 600px;
   color: #ffffff;
   padding: 10px;
+  border-radius: 10px;
 
   button {
     border: $red;
@@ -198,7 +202,7 @@ h2 {
     background-color: transparent;
 
     &:hover {
-      cursor: pointer;
+      @include button-hover();
       border: $navy;
       border-style: inset;
       background-color: $red;
@@ -206,6 +210,54 @@ h2 {
   }
 }
 
+#results {
+  background-color: $navy;
+  width: 60%;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.room-result-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: 330px;
+  height: 180px;
+  position: relative;
+  
+  h3 {
+    color: $navy;
+  }
+
+  .cost-per-night {
+    text-align: right;
+    position: absolute;
+    margin: 0;
+    left: 15px;
+    bottom: 15px;
+  }
+
+  button {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    color: #ffffff;
+    background-color: $navy;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+
+    &:hover {
+      @include button-hover();
+      background-color: #494987;
+    }
+  }
+}
 
 // HIDDEN
 
