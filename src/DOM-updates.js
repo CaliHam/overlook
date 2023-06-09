@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, validateDate, filterRooms, bookRoom, getCurrentBookings, currentCustomer } from './scripts.js'
+import { checkAvailability, validateDate, filterRooms, bookRoom, getCurrentBookings, currentCustomer , newlyBookedRoom} from './scripts.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
@@ -8,7 +8,7 @@ const totalCost = document.querySelector('#total-cost')
 const userMenu = document.querySelector('.user')
 const dashView = document.querySelector('#dashboard-view')
 const bookingView = document.querySelector('#booking-view')
-const dashBtn = document.querySelector('#dash-btn')
+const dashBtns = document.querySelectorAll('.dash-btn')
 const bookingBtn = document.querySelector('#book-btn')
 const calendar = document.querySelector('#calendar')
 const checkDateBtn = document.querySelector('#check-date')
@@ -22,11 +22,11 @@ const picker = datepicker(calendar)
 
 // EVENT LISTENERS
 
-dashBtn.addEventListener('click', () => {
+dashBtns.forEach(button => button.addEventListener('click', () => {
 	hideAllPages()
 	dashView.classList.remove('hidden')
 	getCurrentBookings(currentCustomer)
-})
+}))
 
 bookingBtn.addEventListener('click', () => {
 	hideAllPages()
@@ -80,7 +80,7 @@ const displayTotal = (cost) => {
 
 const displayAvailableRooms = (availableRooms, date) => {
 	searchResults.classList.remove('hidden')
-	searchResults.innerHTML = `<h3>Showing results for ${date}...</h3>`
+	searchResults.innerHTML = `<h2>Showing results for ${dayjs(date).format('MMMM D, YYYY')}...</h2>`
 	checkForError(availableRooms, date)
 	availableRooms.forEach(room => {
 		searchResults.innerHTML += `
@@ -100,10 +100,11 @@ const displayAvailableRooms = (availableRooms, date) => {
 
 const checkForError = (availableRooms, date) => {
 	searchResults.classList.remove('hidden')
+	filterForm.classList.add('hidden')
 	if(!date){
-		searchResults.innerHTML = `<p class="error">Please enter a valid date!</p>`
+		searchResults.innerHTML = `<h2 class="error">Please enter a valid date!</h2>`
 	} else if(!availableRooms.length){
-		searchResults.innerHTML = `<p class="error">Sorry there are no rooms available on ${date} at this time.</p>`
+		searchResults.innerHTML = `<h2 class="error">Sorry, there are no rooms available on ${dayjs(date).format('MMMM D, YYYY')} at this time.</h2>`
 	}
 }
 
@@ -111,11 +112,47 @@ const displayFilterOption = () => {
 	filterForm.classList.remove('hidden')
 }
 
+const confirmBooking = (booking) => {
+	searchResults.innerHTML = `
+		<div id="confirmation">
+			<h2>Booking Confirmed</h2>
+			<p>Thank you ${currentCustomer.name}!</p>
+			<p>We are pleased to inform you that your reservation has been received and confirmed.</p>
+			<hr>
+			<table id="booking-details">
+				<thead>
+					<th>Booking Details:</th>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Confirmation Number</th>
+						<th>Room Type</th>
+						<th>Date</th>
+						<th>Total Cost</th>
+					</tr>
+					<tr>
+						<td>${booking.id}</td>
+						<td>${newlyBookedRoom.roomType.toUpperCase()}</td>
+						<td>${dayjs(booking.date).format('MMMM D, YYYY')}</td>
+						<td>$${newlyBookedRoom.costPerNight}</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="dash-btn">View My Dashboard</button>
+		</div>`
+		const dashBtns = document.querySelectorAll('.dash-btn')
+		dashBtns.forEach(button => button.addEventListener('click', () => {
+			hideAllPages()
+			dashView.classList.remove('hidden')
+			getCurrentBookings(currentCustomer)
+		}))
+}
 
 export {
 	displayBookings,
 	displayTotal,
 	displayUsername,
 	displayAvailableRooms,
-	displayFilterOption
+	displayFilterOption,
+	confirmBooking
 }

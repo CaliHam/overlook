@@ -17,6 +17,7 @@ let allBookings;
 let allRooms;
 let availableRooms;
 let formattedDate;
+let newlyBookedRoom;
 
 window.onload = () => {
 	getData('customers/20')
@@ -103,6 +104,7 @@ const filterRooms = (filterType) => {
 }
 
 const bookRoom = (newRoom) => {
+	newlyBookedRoom = allRooms.find(room => room.number === parseInt(newRoom))
 	const newId = String(Date.now());
 	const newBooking = {
 		"id": newId,
@@ -120,5 +122,6 @@ export {
 	bookRoom,
 	setData,
 	getCurrentBookings,
-	currentCustomer
+	currentCustomer,
+	newlyBookedRoom
 }

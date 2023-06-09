@@ -1,5 +1,6 @@
 // IMPORTS
 import { setData } from './scripts.js'
+import { confirmBooking } from './DOM-updates.js'
 
 // FETCH REQUESTS
 
@@ -17,7 +18,7 @@ const postData = (data) => {
     })
         .then(response => response.json())
         .then(resolve => {
-            console.log(resolve)
+            confirmBooking(resolve.newBooking)
             setData()
         })
         .catch(err => console.log("ERROR", err));
