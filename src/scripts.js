@@ -77,6 +77,10 @@ const getTotalCost = (rooms) => {
 // In the event that no rooms are available for the date/roomType selected, display a message fiercely 
 	// apologizing to the user and asking them to adjust their room search
 
+const validateDate = (value) => {
+	return dayjs(value).format('YYYY/MM/DD')
+}
+
 const checkAvailability = (date) => {
 	const formattedDate = dayjs(date).format('YYYY/MM/DD')
 	const allRoomNumbers = allRooms.map(room => room.number)
@@ -96,5 +100,6 @@ const checkAvailability = (date) => {
 // }
 
 export {
-	checkAvailability
+	checkAvailability,
+	validateDate
 }

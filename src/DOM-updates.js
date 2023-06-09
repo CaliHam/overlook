@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability } from './scripts.js'
+import { checkAvailability, validateDate } from './scripts.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
@@ -13,6 +13,7 @@ const bookingBtn = document.querySelector('#book-btn')
 const calendar = document.querySelector('#calendar')
 const checkDateBtn = document.querySelector('#check-date')
 const searchResults = document.querySelector('#results')
+let formattedDate;
 
 // Date Picker //
 const picker = datepicker(calendar)
@@ -31,7 +32,7 @@ bookingBtn.addEventListener('click', () => {
 
 checkDateBtn.addEventListener('click', (e) => {
 	e.preventDefault()
-	checkAvailability(calendar.value)
+	validateDate(calendar.value) !== 'Invalid Date' ? checkAvailability(calendar.value) : checkForError()
 })
 
 // CODE
@@ -72,9 +73,7 @@ const displayTotal = (cost) => {
 const displayAvailableRooms = (availableRooms, date) => {
 	searchResults.classList.remove('hidden')
 	searchResults.innerHTML = ''
-	if(!availableRooms.length){
-		searchResults.innerHTML = `<p>Sorry there are no rooms available on ${date} at this time.</p>`
-	}
+	checkForError(availableRooms, date)
 	availableRooms.forEach(room => {
 		searchResults.innerHTML += `
 		<div class="room-result-container">
@@ -85,6 +84,15 @@ const displayAvailableRooms = (availableRooms, date) => {
 			<button class="book-room-btn">Book</button
 		</div>`
 	})
+}
+
+const checkForError = (availableRooms, date) => {
+	searchResults.classList.remove('hidden')
+	if(!date){
+		searchResults.innerHTML = `<p class="error">Please enter a valid date!</p>`
+	} else if(!availableRooms.length){
+		searchResults.innerHTML = `<p class="error">Sorry there are no rooms available on ${date} at this time.</p>`
+	}
 }
 
 

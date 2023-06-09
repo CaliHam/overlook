@@ -194,18 +194,22 @@ h2 {
   padding: 10px;
   border-radius: 10px;
 
+  label {
+    margin-right: 15px;
+  }
+
   button {
-    border: $red;
+    border: 1px groove #ffffff;
     color: #ffffff;
+    margin-left: 15px;
     border-radius: 10px;
-    border-style: groove;
     background-color: transparent;
 
     &:hover {
       @include button-hover();
-      border: $navy;
-      border-style: inset;
-      background-color: $red;
+      border: 1px inset $navy;
+      color: $navy;
+      background-color: #ffffff;
     }
   }
 }
@@ -221,6 +225,11 @@ h2 {
   justify-content: space-around;
 }
 
+.error {
+  color: #ffffff;
+  font-weight: 600;
+}
+
 .room-result-container {
   background-color: #ffffff;
   border-radius: 10px;
@@ -232,6 +241,8 @@ h2 {
   
   h3 {
     color: $navy;
+    text-transform: uppercase;
+    font-size: 1em;
   }
 
   .cost-per-night {
