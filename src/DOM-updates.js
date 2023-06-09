@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, validateDate, filterRooms } from './scripts.js'
+import { checkAvailability, validateDate, filterRooms, bookRoom, getCurrentBookings, currentCustomer } from './scripts.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
@@ -25,6 +25,7 @@ const picker = datepicker(calendar)
 dashBtn.addEventListener('click', () => {
 	hideAllPages()
 	dashView.classList.remove('hidden')
+	getCurrentBookings(currentCustomer)
 })
 
 bookingBtn.addEventListener('click', () => {
@@ -79,11 +80,11 @@ const displayTotal = (cost) => {
 
 const displayAvailableRooms = (availableRooms, date) => {
 	searchResults.classList.remove('hidden')
-	searchResults.innerHTML = ''
+	searchResults.innerHTML = `<h3>Showing results for ${date}...</h3>`
 	checkForError(availableRooms, date)
 	availableRooms.forEach(room => {
 		searchResults.innerHTML += `
-		<div class="room-result-container">
+		<div id="${room.number}" class="room-result-container">
 			<h3>${room.roomType} with ${room.numBeds} ${room.bedSize} bed</h3>
 			<p class="bidet">Bidet ${room.bidet ? 'is' : 'not'} included.</p>
 			<hr>
@@ -91,6 +92,10 @@ const displayAvailableRooms = (availableRooms, date) => {
 			<button class="book-room-btn">Book</button
 		</div>`
 	})
+	const bookRoomBtn = document.querySelectorAll('.book-room-btn')
+	bookRoomBtn.forEach(button => button.addEventListener('click', (e) => {
+		bookRoom(e.target.closest('div').id)
+	}))
 }
 
 const checkForError = (availableRooms, date) => {

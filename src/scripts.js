@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
-import { getData, getAllData } from './apiCalls';
+import { getData, postData, getAllData } from './apiCalls';
 import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayFilterOption } from './DOM-updates'
 
 let currentCustomer;
@@ -102,8 +102,23 @@ const filterRooms = (filterType) => {
 	displayAvailableRooms(filteredRooms, formattedDate)
 }
 
+const bookRoom = (newRoom) => {
+	const newId = String(Date.now());
+	const newBooking = {
+		"id": newId,
+		"userID": currentCustomer.id,
+		"date": formattedDate.toString(),
+		"roomNumber": parseInt(newRoom)
+	}
+	postData(newBooking)
+} 
+
 export {
 	checkAvailability,
 	validateDate,
-	filterRooms
+	filterRooms,
+	bookRoom,
+	setData,
+	getCurrentBookings,
+	currentCustomer
 }
