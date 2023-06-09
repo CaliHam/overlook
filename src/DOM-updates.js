@@ -78,10 +78,11 @@ const displayTotal = (cost) => {
 	totalCost.innerHTML = `<b>${cost}</b>`
 }
 
-const displayAvailableRooms = (availableRooms, date) => {
+const displayAvailableRooms = (availableRooms, date, filterType) => {
 	searchResults.classList.remove('hidden')
-	searchResults.innerHTML = `<h2>Showing results for ${dayjs(date).format('MMMM D, YYYY')}...</h2>`
-	checkForError(availableRooms, date)
+	searchResults.innerHTML = `<h2>Showing rooms available for ${dayjs(date).format('MMMM D, YYYY')}:</h2>`
+	displayFilterOption()
+	checkForError(availableRooms, date, filterType)
 	availableRooms.forEach(room => {
 		searchResults.innerHTML += `
 		<div id="${room.number}" class="room-result-container">
@@ -98,13 +99,16 @@ const displayAvailableRooms = (availableRooms, date) => {
 	}))
 }
 
-const checkForError = (availableRooms, date) => {
+const checkForError = (availableRooms, date, filterType) => {
 	searchResults.classList.remove('hidden')
-	filterForm.classList.add('hidden')
 	if(!date){
-		searchResults.innerHTML = `<h2 class="error">Please enter a valid date!</h2>`
-	} else if(!availableRooms.length){
-		searchResults.innerHTML = `<h2 class="error">Sorry, there are no rooms available on ${dayjs(date).format('MMMM D, YYYY')} at this time.</h2>`
+		filterForm.classList.add('hidden')
+		searchResults.innerHTML = `<h2>Please enter a valid date!</h2>`
+	} else if (!availableRooms.length && filterType) {
+		searchResults.innerHTML = `<h2>Sorry, there are no ${filterType} rooms available on ${dayjs(date).format('MMMM D, YYYY')}. Please try another room.</h2>`	
+	}	else if (!availableRooms.length){
+		filterForm.classList.add('hidden')
+		searchResults.innerHTML = `<h2>Sorry, there are no rooms available on ${dayjs(date).format('MMMM D, YYYY')}. Please try another day.</h2>`
 	}
 }
 
