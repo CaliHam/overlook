@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData, getAllData } from './apiCalls';
-import { displayBookings, displayTotal, displayUsername, displayAvailableRooms } from './DOM-updates'
+import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayFilterOption } from './DOM-updates'
 
 let currentCustomer;
 let currentBookings;
@@ -15,6 +15,8 @@ let bookedRooms;
 let allCustomers;
 let allBookings;
 let allRooms;
+let availableRooms;
+let formattedDate;
 
 window.onload = () => {
 	getData('customers/20')
@@ -82,24 +84,26 @@ const validateDate = (value) => {
 }
 
 const checkAvailability = (date) => {
-	const formattedDate = dayjs(date).format('YYYY/MM/DD')
+	formattedDate = dayjs(date).format('YYYY/MM/DD')
 	const allRoomNumbers = allRooms.map(room => room.number)
 	const unavailableRooms = allBookings.filter(booking => booking.date === formattedDate).map(room => room.roomNumber)
 	const roomsReady = allRoomNumbers.filter(room => !unavailableRooms.includes(room))
-	const availableRooms = roomsReady.reduce((acc, currNum) => {
+	availableRooms = roomsReady.reduce((acc, currNum) => {
 		let foundRoom = allRooms.find(room => room.number === currNum)
 		acc.push(foundRoom)
 		return acc
 	},[])
 	displayAvailableRooms(availableRooms, date)
-	// filterRooms(availableRooms)
+	displayFilterOption()
 }
 
-// const filterRooms = (rooms) => {
-
-// }
+const filterRooms = (filterType) => {
+	const filteredRooms = availableRooms.filter(room => room.roomType === filterType)
+	displayAvailableRooms(filteredRooms, formattedDate)
+}
 
 export {
 	checkAvailability,
-	validateDate
+	validateDate,
+	filterRooms
 }

@@ -28,7 +28,7 @@
         <table id="customer-bookings">
           <thead>
             <tr>
-              <th>Room #</th>
+              <th>Room Type</th>
               <th>Date</th>
               <th>Cost</th>
             </tr>
@@ -37,7 +37,7 @@
             <!-- booking info goes here -->
           </tbody>
           <tfoot>
-            <th>Total Cost</th>
+            <th>Total Cost:</th>
             <td></td>
             <td id="total-cost"></td>
           </tfoot>
@@ -45,11 +45,23 @@
       </section>
       <section id="booking-view" class="hidden">
         <h2>Check-In to Unforgettable Experiences</h2>
-        <form id="date-picker">
-          <label for="calendar">Select your date: </label>
-          <input id="calendar">
-          <button type="submit" value="Submit" id="check-date">Check Availability</button>
-        </form>
+        <nav id="booking-nav">
+          <form id="date-picker">
+            <label for="calendar">Select your date: </label>
+            <input id="calendar">
+            <button type="submit" value="Submit" id="check-date">Check Availability</button>
+          </form>
+          <form id="filter-by-room-type" class="hidden">
+            <label for="room-type">Filter by room type:</label>
+            <select id="room-type">
+              <option value="residential suite">Residential Suite</option>
+              <option value="suite">Suite</option>
+              <option value="single room">Single Room</option>
+              <option value="junior suite">Junior Suite</option>
+            </select>
+            <button type="submit" value="Submit" id="submit-filter">Submit</button>
+          </form>
+        </nav>
         <article id="results" class="hidden">
           <!-- search results will show here -->
         </article>

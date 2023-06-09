@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, validateDate } from './scripts.js'
+import { checkAvailability, validateDate, filterRooms } from './scripts.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
@@ -13,7 +13,9 @@ const bookingBtn = document.querySelector('#book-btn')
 const calendar = document.querySelector('#calendar')
 const checkDateBtn = document.querySelector('#check-date')
 const searchResults = document.querySelector('#results')
-let formattedDate;
+const filterForm = document.querySelector('#filter-by-room-type')
+const filterType = document.querySelector('#room-type')
+const submitFilter = document.querySelector('#submit-filter')
 
 // Date Picker //
 const picker = datepicker(calendar)
@@ -33,6 +35,11 @@ bookingBtn.addEventListener('click', () => {
 checkDateBtn.addEventListener('click', (e) => {
 	e.preventDefault()
 	validateDate(calendar.value) !== 'Invalid Date' ? checkAvailability(calendar.value) : checkForError()
+})
+
+submitFilter.addEventListener('click', (e) => {
+	e.preventDefault()
+	filterRooms(filterType.value)
 })
 
 // CODE
@@ -59,7 +66,7 @@ const displayBookings = (bookings, rooms) => {
 	bookings.forEach((booking, i)=> {
 		bookingTable.innerHTML += `
 			<tr id="${booking.id}">
-				<td>${booking.roomNumber}</td>
+				<td>${rooms[i].roomType.toUpperCase()}</td>
 				<td>${dayjs(booking.date).format('MMMM D, YYYY')}</td>
 				<td>$${rooms[i].costPerNight}</td>
 			</tr>`
@@ -95,10 +102,15 @@ const checkForError = (availableRooms, date) => {
 	}
 }
 
+const displayFilterOption = () => {
+	filterForm.classList.remove('hidden')
+}
+
 
 export {
 	displayBookings,
 	displayTotal,
 	displayUsername,
-	displayAvailableRooms
+	displayAvailableRooms,
+	displayFilterOption
 }

@@ -152,7 +152,7 @@ h1, h2 {
   border-collapse: collapse;
   margin-bottom: 60px;
   font-size: 0.9em;
-  min-width: 450px;
+  min-width: 550px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
   th {
@@ -176,17 +176,24 @@ h1, h2 {
 }
 
 // NEW BOOKING VIEW
-
-h2 {
-  font-size: 2em;
-}
-
 #booking-view {
   @include centered();
   flex-direction: column;
 }
 
-#date-picker {
+h2 {
+  font-size: 2em;
+}
+
+#booking-nav {
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 105px;
+}
+
+#date-picker, #filter-by-room-type {
   @include centered();
   background-color: $navy;
   max-width: 600px;
@@ -213,6 +220,10 @@ h2 {
     }
   }
 }
+
+// #filter-by-room-type {
+
+// }
 
 #results {
   background-color: $navy;
