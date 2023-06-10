@@ -177,6 +177,9 @@ h1, h2 {
     background-color: #ffffff;
     text-align: center;
   }
+  .room-type {
+    text-align: left;
+  }
   tr:nth-of-type(even) {
     background-color: #f3f3f3;
   }
@@ -194,10 +197,8 @@ h1, h2 {
 
 #booking-nav {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 105px;
 }
 
 #date-picker, #filter-by-room-type {
@@ -206,7 +207,9 @@ h1, h2 {
   max-width: 600px;
   color: #ffffff;
   padding: 10px;
+  margin: 10px;
   border-radius: 10px;
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.15);
 
   label {
     margin-right: 15px;
@@ -229,16 +232,20 @@ h1, h2 {
 }
 
 #results {
+  overflow-y: auto;
+  max-height: 500px;
   background-color: $navy;
-  width: 60%;
+  width: 80%;
   margin: 20px;
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  box-shadow: 10px 10px 20px 3px rgba(0,0,0,0.25);
 
   h2 {
+    width: inherit;
     color: #ffffff;
     text-align: center;
     margin: 15px;
@@ -247,9 +254,15 @@ h1, h2 {
   }
 }
 
-.error {
-  color: #ffffff;
-  font-weight: 600;
+#results::-webkit-scrollbar, #booking-info::-webkit-scrollbar {
+  width: 10px;
+  background-color: #2b2b4e;
+  border-radius: 20px;
+}
+
+#results::-webkit-scrollbar-thumb, #booking-info::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 50px;
 }
 
 .room-result-container {
@@ -298,7 +311,8 @@ h1, h2 {
   background-color: #ffffff;
   color: $navy;
   border-radius: inherit;
-  padding: inherit;
+  padding: 30px 30px 50px;
+  position: relative;
 
   h2 {
     color: $navy;
@@ -309,7 +323,6 @@ h1, h2 {
 #booking-details {
   border-collapse: collapse;
   font-size: 0.9em;
-  // box-shadow: 10px 10px 8px -4px rgba(0,0,0,0.2);
   width: -webkit-fill-available;
 
   th, td {
@@ -327,6 +340,26 @@ h1, h2 {
     border: none;
   }
 }
+
+#dash-card-btn {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  color: #ffffff;
+  background-color: $navy;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+
+  &:hover {
+    @include button-hover();
+    background-color: #494987;
+  }
+}
+
+// Media Queries
+
+
 
 
 // HIDDEN

@@ -67,7 +67,7 @@ const displayBookings = (bookings, rooms) => {
 	bookings.forEach((booking, i)=> {
 		bookingTable.innerHTML += `
 			<tr id="${booking.id}">
-				<td>${rooms[i].roomType.toUpperCase()}</td>
+				<td class="room-type">${rooms[i].roomType.toUpperCase()}</td>
 				<td>${dayjs(booking.date).format('MMMM D, YYYY')}</td>
 				<td>$${rooms[i].costPerNight}</td>
 			</tr>`
@@ -105,10 +105,10 @@ const checkForError = (availableRooms, date, filterType) => {
 		filterForm.classList.add('hidden')
 		searchResults.innerHTML = `<h2>Please enter a valid date!</h2>`
 	} else if (!availableRooms.length && filterType) {
-		searchResults.innerHTML = `<h2>Sorry, there are no ${filterType} rooms available on ${dayjs(date).format('MMMM D, YYYY')}. Please try another room.</h2>`	
+		searchResults.innerHTML = `<h2>Sorry, there are no ${filterType} rooms available on ${dayjs(date).format('MMMM D, YYYY')}.<br> Please try another room.</h2>`	
 	}	else if (!availableRooms.length){
 		filterForm.classList.add('hidden')
-		searchResults.innerHTML = `<h2>Sorry, there are no rooms available on ${dayjs(date).format('MMMM D, YYYY')}. Please try another day.</h2>`
+		searchResults.innerHTML = `<h2>Sorry, there are no rooms available on ${dayjs(date).format('MMMM D, YYYY')}.<br> Please try another day.</h2>`
 	}
 }
 
@@ -142,7 +142,7 @@ const confirmBooking = (booking) => {
 					</tr>
 				</tbody>
 			</table>
-			<button class="dash-btn">View My Dashboard</button>
+			<button id="dash-card-btn" class="dash-btn">View My Dashboard</button>
 		</div>`
 		const dashBtns = document.querySelectorAll('.dash-btn')
 		dashBtns.forEach(button => button.addEventListener('click', () => {
