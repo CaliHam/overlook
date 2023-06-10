@@ -37,7 +37,6 @@ passwordField.addEventListener('keydown', (e) => {
 loginBtn.addEventListener('click', (e) => {
 	e.preventDefault()
 	validateUser(usernameField.value, passwordField.value)
-	// loginUser(usernameField.value, passwordField.value)
 })
 
 dashBtns.forEach(button => button.addEventListener('click', () => {
@@ -69,7 +68,7 @@ const displayUsername = (user) => {
 
 const validateUser = (user, password) => {
 	const userNum = parseInt(user.slice(8, 10))
-	if (userNum > 50) {
+	if (userNum > 50 || userNum < 1 || !userNum) {
 		loginErrorField.innerText = 'Username does not exist'
 	}
 	else if (password !== 'overlook2021') { 

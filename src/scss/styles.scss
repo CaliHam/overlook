@@ -9,7 +9,6 @@ $clear-navy: rgba(50, 50, 100, 0.612);
 $title-font: 'Montserrat', sans-serif;
 
 // Transition:
-// $button-hover: background-color .2s, transform .2s;
 @mixin button-hover() {
   cursor: pointer; 
   transform: scale(1.1);
