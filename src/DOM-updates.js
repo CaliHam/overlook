@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, validateDate, filterRooms, bookRoom, getCurrentBookings, currentCustomer , newlyBookedRoom} from './scripts.js'
+import { checkAvailability, validateDate, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser } from './scripts.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');
@@ -16,11 +16,29 @@ const searchResults = document.querySelector('#results')
 const filterForm = document.querySelector('#filter-by-room-type')
 const filterType = document.querySelector('#room-type')
 const submitFilter = document.querySelector('#submit-filter')
+const usernameField = document.querySelector('#username')
+const passwordField = document.querySelector('#password')
+const loginBtn = document.querySelector('#login')
+const loginErrorField = document.querySelector('#login-error-field')
+const loginView = document.querySelector('#login-view')
+const userNav = document.querySelector('#user-nav')
 
 // Date Picker //
 const picker = datepicker(calendar)
 
 // EVENT LISTENERS
+
+passwordField.addEventListener('keydown', (e) => {
+	if (e.key === "Enter") {
+		validateUser(usernameField.value, passwordField.value)
+	}
+})
+
+loginBtn.addEventListener('click', (e) => {
+	e.preventDefault()
+	validateUser(usernameField.value, passwordField.value)
+	// loginUser(usernameField.value, passwordField.value)
+})
 
 dashBtns.forEach(button => button.addEventListener('click', () => {
 	hideAllPages()
@@ -49,9 +67,25 @@ const displayUsername = (user) => {
 	userMenu.innerText = user.name
 }
 
+const validateUser = (user, password) => {
+	const userNum = parseInt(user.slice(8, 10))
+	if (userNum > 50) {
+		loginErrorField.innerText = 'Username does not exist'
+	}
+	else if (password !== 'overlook2021') { 
+		loginErrorField.innerText = 'Incorrect Password'
+	} else {
+		hideAllPages()
+		dashView.classList.remove('hidden')
+		userNav.classList.remove('hidden')
+		loginUser(userNum)
+	}
+}
+
 const hideAllPages = () => {
 	dashView.classList.add('hidden')
 	bookingView.classList.add('hidden')
+	loginView.classList.add('hidden')
 }
 
 const displayBookings = (bookings, rooms) => {

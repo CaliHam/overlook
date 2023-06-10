@@ -6,8 +6,8 @@ import dayjs from 'dayjs';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
-import { getData, postData, getAllData } from './apiCalls';
-import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayFilterOption } from './DOM-updates'
+import { getData, getUser, postData, getAllData } from './apiCalls';
+import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, } from './DOM-updates'
 
 let currentCustomer;
 let currentBookings;
@@ -19,8 +19,8 @@ let availableRooms;
 let formattedDate;
 let newlyBookedRoom;
 
-window.onload = () => {
-	getData('customers/20')
+const loginUser = (num) => {
+	getUser(num)
 		.then(response => {
 			currentCustomer = response
 			getCurrentBookings(currentCustomer)
@@ -110,6 +110,7 @@ const bookRoom = (newRoom) => {
 } 
 
 export {
+	loginUser,
 	checkAvailability,
 	validateDate,
 	filterRooms,
