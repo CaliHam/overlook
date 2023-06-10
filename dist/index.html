@@ -13,7 +13,7 @@
   <body>
     <header>
       <img id="overlook-logo" src="./images/Overlook-logo.png" alt="Overlook Logo">
-      <nav id="user-nav" class="dropdown">
+      <nav id="user-nav" class="dropdown hidden">
         <div id="user-menu" class="drop-container"><p class="user">Username</p><img class="arrowhead" src="./images/arrowhead.png">
           <ul class="dropdown-content">
             <button class="dash-btn">My Dashboard</button>
@@ -23,7 +23,18 @@
       </nav>
     </header>
     <main>
-      <section id="dashboard-view">
+      <section id="login-view">
+        <h1>Welcome to Overlook!</h1>
+        <h3>~Please login below~</h3>
+        <div id="login-container">
+          <label for="username">Username:</label>
+          <input id="username" name="username" placeholder="customer##" required>
+          <label for="password">Password:</label>
+          <input type="password" placeholder="************" required>
+          <button type="submit">Login</button>
+        </div>
+      </section>
+      <section id="dashboard-view" class="hidden">
         <h1>My Dashboard</h1>
         <table id="customer-bookings">
           <thead>
