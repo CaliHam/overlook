@@ -141,8 +141,9 @@ header {
     margin: 10px 0px;
   }
 
-  h3 {
+  h2 {
     margin: 30px 0px;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
   }
 
   #login-container {
@@ -172,7 +173,7 @@ header {
   }
 }
 
-h1, h2 {
+h1 {
   color: $navy;
   text-shadow: 5px 5px 0px #e7e7f0d2, 5px 4px 0px rgba(0,0,0,0.15);
   text-align: center;
