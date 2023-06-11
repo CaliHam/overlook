@@ -66,12 +66,6 @@ submitFilter.addEventListener('click', (e) => {
 	filterRooms(filterType.value)
 })
 
-// submitFilter.addEventListener('keydown', (e) => {
-// 	if (e.key === "Enter") {
-// 		filterRooms(filterType.value)
-// 	}
-// })
-
 // CODE
 
 const displayUsername = (user) => {
