@@ -18,11 +18,30 @@ describe('Retrieve cost', function() {
   // beforeEach(() => {
     
   // })
-  it('should return a cost given an array of room objects', function() {
+  it('should return a cost given an array of room objects', () => {
     const totalCost = getTotalCost(sampleRooms.rooms)
 
     expect(totalCost).to.equal('$1,326.92')
   });
+
+  it('should return a cost given a single room', () => {
+    const totalCost = getTotalCost([{
+      "number": 15,
+      "roomType": "residential suite",
+      "bidet": true,
+      "bedSize": "queen",
+      "numBeds": 1,
+      "costPerNight": 358.4
+      }])
+
+    expect(totalCost).to.equal('$358.40')
+  });
+
+  it('should return $0 if given no array', () => {
+    const totalCost = getTotalCost([])
+
+    expect(totalCost).to.equal('$0.00')
+  })
 });
 
 describe('Get date', function() {
