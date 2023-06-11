@@ -13,19 +13,19 @@
   <body>
     <header>
       <img id="overlook-logo" src="./images/Overlook-logo.png" alt="Overlook Logo">
-      <nav id="user-nav" class="dropdown hidden">
-        <div id="user-menu" class="drop-container"><p class="user">Username</p><img class="arrowhead" src="./images/arrowhead.png">
+      <nav id="user-nav" class="dropdown" tabindex="0">
+        <div id="user-menu" class="drop-container"><p class="user">Username</p><img class="arrowhead" alt="down arrow" src="./images/arrowhead.png">
           <ul class="dropdown-content">
-            <button class="dash-btn">My Dashboard</button>
-            <button id="book-btn">New Booking</button>
+            <button class="dash-btn" tabindex="0">My Dashboard</button>
+            <button id="book-btn" tabindex="0">New Booking</button>
           </ul>
         </div>
       </nav>
     </header>
     <main>
-      <section id="login-view">
+      <section id="login-view" class="hidden">
         <h1>Welcome to Overlook!</h1>
-        <h3>~Please login below~</h3>
+        <h2>~Please login below~</h2>
         <div id="login-container">
           <label for="username">Username:</label>
           <input id="username" name="username" placeholder="customer##" required>
@@ -35,7 +35,7 @@
         </div>
         <p id="login-error-field"></p>
       </section>
-      <section id="dashboard-view" class="hidden">
+      <section id="dashboard-view">
         <h1>My Dashboard</h1>
         <table id="customer-bookings">
           <thead>

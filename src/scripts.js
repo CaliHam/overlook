@@ -12,7 +12,7 @@ import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, 
 let currentCustomer;
 let currentBookings;
 let bookedRooms;
-// let allCustomers;
+let allCustomers;
 let allBookings;
 let allRooms;
 let availableRooms;
@@ -26,6 +26,16 @@ const loginUser = (num) => {
 			getCurrentBookings(currentCustomer)
 			displayUsername(currentCustomer)
 	})
+	setData();
+}
+
+window.onload = () => {
+    getData('customers/20')
+    .then(response => {
+        currentCustomer = response
+        getCurrentBookings(currentCustomer)
+        displayUsername(currentCustomer)
+    })
 	setData();
 }
 

@@ -55,10 +55,22 @@ checkDateBtn.addEventListener('click', (e) => {
 	validateDate(calendar.value) !== 'Invalid Date' ? checkAvailability(calendar.value) : checkForError()
 })
 
+checkDateBtn.addEventListener('keydown', (e) => {
+	if (e.key === "Enter") {
+		validateDate(calendar.value) !== 'Invalid Date' ? checkAvailability(calendar.value) : checkForError()
+	}
+})
+
 submitFilter.addEventListener('click', (e) => {
 	e.preventDefault()
 	filterRooms(filterType.value)
 })
+
+// submitFilter.addEventListener('keydown', (e) => {
+// 	if (e.key === "Enter") {
+// 		filterRooms(filterType.value)
+// 	}
+// })
 
 // CODE
 
