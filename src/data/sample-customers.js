@@ -1,4 +1,4 @@
-const customerRequest = {
+const sampleCustomers = {
     "customers": [
         {
         "id": 1,
@@ -15,4 +15,4 @@ const customerRequest = {
     ]
 }
 
-export { customerRequest }
+export { sampleCustomers }

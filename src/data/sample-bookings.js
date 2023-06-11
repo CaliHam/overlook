@@ -1,4 +1,4 @@
-const bookingRequest = {
+const sampleBookings = {
     "bookings": [
         {
         "id": "5fwrgu4i7k55hl6sz",
@@ -21,4 +21,4 @@ const bookingRequest = {
     ]
 }
 
-export { bookingRequest }
+export { sampleBookings }
