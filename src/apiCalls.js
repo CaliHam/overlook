@@ -10,6 +10,12 @@ const getData = (data) => {
     .catch(err => console.log(err))
 };
 
+const getUser = (num) => {
+    return fetch(`http://localhost:3001/api/v1/customers/${num}`)
+    .then(response => response.json())
+    .catch(err => console.log(err))
+}
+
 const postData = (data) => {
     fetch('http://localhost:3001/api/v1/bookings', {
         method: 'POST',
@@ -30,6 +36,7 @@ const getAllData = () => {
 
 export {
     getData,
+    getUser,
     postData,
     getAllData
 }
