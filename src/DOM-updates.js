@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, validateDate, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser } from './scripts.js'
+import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser } from './scripts.js'
+import { validateDate } from './booking-utilities.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
 const bookingTable = document.querySelector('#booking-info');

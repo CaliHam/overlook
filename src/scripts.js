@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
 import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, } from './DOM-updates'
-import { getTotalCost } from './booking-utilities';
+import { getTotalCost, validateDate, findAvailableRooms } from './booking-utilities';
 
 let currentCustomer;
 let currentBookings;
@@ -51,31 +51,18 @@ const getCurrentBookings = (currentCustomer) => {
 const getBookedRooms = (currentBookings) => {
 	getData('rooms')
     .then(response => {
-			const roomNumbers = currentBookings.map(booking => booking.roomNumber)
-			bookedRooms = roomNumbers.reduce((foundRooms, currRoom) => {
-					const foundRoom = response.rooms.find(room => room.number === currRoom)
-					foundRooms.push(foundRoom)
-					return foundRooms
-        }, [])
-			displayTotal(getTotalCost(bookedRooms))
-			displayBookings(currentBookings, bookedRooms)
+		bookedRooms = findRooms(response, currentBookings)
+		displayTotal(getTotalCost(bookedRooms))
+		displayBookings(currentBookings, bookedRooms)
     })
 }
 
-const validateDate = (value) => {
-	return dayjs(value).format('YYYY/MM/DD')
-}
-
 const checkAvailability = (date) => {
-	formattedDate = dayjs(date).format('YYYY/MM/DD')
+	formattedDate = validateDate(date)
 	const allRoomNumbers = allRooms.map(room => room.number)
 	const unavailableRooms = allBookings.filter(booking => booking.date === formattedDate).map(room => room.roomNumber)
 	const roomsReady = allRoomNumbers.filter(room => !unavailableRooms.includes(room))
-	availableRooms = roomsReady.reduce((acc, currNum) => {
-		let foundRoom = allRooms.find(room => room.number === currNum)
-		acc.push(foundRoom)
-		return acc
-	},[])
+	availableRooms = findAvailableRooms(roomsReady)
 	displayAvailableRooms(availableRooms, date)
 }
 
