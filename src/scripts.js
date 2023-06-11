@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
 import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, } from './DOM-updates'
+import { getTotalCost } from './booking-utilities';
 
 let currentCustomer;
 let currentBookings;
@@ -59,18 +60,6 @@ const getBookedRooms = (currentBookings) => {
 			displayTotal(getTotalCost(bookedRooms))
 			displayBookings(currentBookings, bookedRooms)
     })
-}
-
-const getTotalCost = (rooms) => {
-	const totalCost = rooms.reduce((cost, currRoom) => {
-		cost += currRoom.costPerNight;
-		return cost
-	}, 0)
-	const formattedCost = totalCost.toLocaleString('en-US', {
-		style: 'currency',
-		currency: 'USD'
-	});
-	return formattedCost
 }
 
 const validateDate = (value) => {
