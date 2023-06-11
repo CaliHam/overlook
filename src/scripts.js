@@ -12,7 +12,7 @@ import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, 
 let currentCustomer;
 let currentBookings;
 let bookedRooms;
-// let allCustomers;
+let allCustomers;
 let allBookings;
 let allRooms;
 let availableRooms;
