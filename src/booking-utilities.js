@@ -1,4 +1,4 @@
-// import {}
+import dayjs from 'dayjs';
 
 const getTotalCost = (rooms) => {
 	const totalCost = rooms.reduce((cost, currRoom) => {
@@ -16,26 +16,17 @@ const validateDate = (value) => {
 	return dayjs(value).format('YYYY/MM/DD')
 }
 
-const findRooms = (response, currentBookings) => {
-	const roomNumbers = currentBookings.map(booking => booking.roomNumber)
+const findRooms = (roomNumbers, allRooms) => {
 	return roomNumbers.reduce((foundRooms, currRoom) => {
-		const foundRoom = response.rooms.find(room => room.number === currRoom)
+		const foundRoom = allRooms.find(room => room.number === currRoom)
 		foundRooms.push(foundRoom)
 		return foundRooms
 	}, [])
 }
 
-const findAvailableRooms = (roomsReady) => {
-	return roomsReady.reduce((acc, currNum) => {
-		let foundRoom = allRooms.find(room => room.number === currNum)
-		acc.push(foundRoom)
-		return acc
-	},[])
-}
 
 export {
 	getTotalCost,
 	validateDate,
 	findRooms,
-	findAvailableRooms
 }

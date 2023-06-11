@@ -1,14 +1,13 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 import './scss/styles.scss';
-import dayjs from 'dayjs';
 
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
 import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, } from './DOM-updates'
-import { getTotalCost, validateDate, findAvailableRooms } from './booking-utilities';
+import { getTotalCost, validateDate, findRooms } from './booking-utilities';
 
 let currentCustomer;
 let currentBookings;
@@ -51,7 +50,9 @@ const getCurrentBookings = (currentCustomer) => {
 const getBookedRooms = (currentBookings) => {
 	getData('rooms')
     .then(response => {
-		bookedRooms = findRooms(response, currentBookings)
+		allRooms = response.rooms
+		const roomNumbers = currentBookings.map(booking => booking.roomNumber)
+		bookedRooms = findRooms(roomNumbers, allRooms)
 		displayTotal(getTotalCost(bookedRooms))
 		displayBookings(currentBookings, bookedRooms)
     })
@@ -62,7 +63,7 @@ const checkAvailability = (date) => {
 	const allRoomNumbers = allRooms.map(room => room.number)
 	const unavailableRooms = allBookings.filter(booking => booking.date === formattedDate).map(room => room.roomNumber)
 	const roomsReady = allRoomNumbers.filter(room => !unavailableRooms.includes(room))
-	availableRooms = findAvailableRooms(roomsReady)
+	availableRooms = findRooms(roomsReady, allRooms)
 	displayAvailableRooms(availableRooms, date)
 }
 
