@@ -29,6 +29,7 @@ const percentOccupied = document.querySelector('#rooms-occ')
 const todaysDate = document.querySelector('#today-date')
 const customerName = document.querySelector('#customer-name')
 const searchCustomersBtn = document.querySelector('#search-customers')
+const customerHeader = document.querySelector('#customer-search-results')
 
 // Date Picker //
 const picker = datepicker(calendar)
@@ -145,6 +146,10 @@ const renderBookingsTable = (tableType) => {
 	</tfoot>`
 }
 
+const displayCustomer = (customer) => {
+	customerHeader.innerText = `Bookings for ${customer.name}`
+}
+
 const displayBookings = (bookings, rooms) => {
 	// if(!bookings){
 	// 	wholeTable.innerHTML = `<th>Book some rooms the view them here!</th>`
@@ -247,6 +252,7 @@ export {
 	renderBookingsTable,
 	displayTotal,
 	displayUsername,
+	displayCustomer,
 	displayManagerView,
 	displayAvailableRooms,
 	confirmBooking

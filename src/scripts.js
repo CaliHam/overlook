@@ -6,7 +6,7 @@ import './scss/styles.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
-import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayManagerView, renderBookingsTable } from './DOM-updates'
+import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayManagerView, renderBookingsTable, displayCustomer } from './DOM-updates'
 import { getTotalCost, validateDate, findRooms, getOpenRooms, getUnavailableRooms } from './booking-utilities';
 
 let currentCustomer;
@@ -76,6 +76,8 @@ const getBookedRooms = (currentBookings, tableType) => {
 const searchForCustomer = (name) => {
 	if (name === '') {return}
 	currentCustomer = allCustomers.find(customer => customer.name.toLowerCase().includes(name.toLowerCase()))
+	console.log(currentCustomer)
+	displayCustomer(currentCustomer)
 	getCurrentBookings(currentCustomer, 'manager')
 	// 2 buttons appear and user's dash
 		// Add booking for this customer

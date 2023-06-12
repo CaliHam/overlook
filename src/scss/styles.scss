@@ -192,6 +192,12 @@ main {
 #manager-dash-view {
   display: flex;
   justify-content: space-evenly;
+
+  h2 {
+    color: $navy;
+    text-align: center;
+    text-shadow: 5px 5px 0px #e7e7f0d2, 5px 4px 0px rgba(0,0,0,0.15);
+  }
 }
 
 #dashboard-view, #day-overview {
