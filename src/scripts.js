@@ -65,25 +65,12 @@ const getBookedRooms = (currentBookings, tableType) => {
     })
 }
 
-// As a manager:
-	// I should be able to search for any user by name and:
-		// View their name, a list of all of their bookings, and the total amount they’ve spent
-			// this is just the user's dashboard...
-		// Add a room booking for that user
-			// the whole booking page... but for the manager for the user....
-		// Delete any upcoming room bookings for that user (they cannot delete a booking from the past)
-
 const searchForCustomer = (name) => {
 	if (name === '') {return}
 	currentCustomer = allCustomers.find(customer => customer.name.toLowerCase().includes(name.toLowerCase()))
 	displayCustomer(currentCustomer)
 	getCurrentBookings(currentCustomer, 'manager')
-	// 2 buttons appear and user's dash
-		// Add booking for this customer
-		// Delete booking for this customer
 }
-
-
 
 const getTodaysData = () => {
 	const today = new Date().toLocaleDateString();
