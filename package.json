@@ -31,6 +31,8 @@
   },
   "dependencies": {
     "dayjs": "^1.11.8",
-    "js-datepicker": "^5.18.2"
+    "ignore-styles": "^5.0.1",
+    "js-datepicker": "^5.18.2",
+    "mock-require": "^3.0.3"
   }
 }

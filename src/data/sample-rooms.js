@@ -1,4 +1,4 @@
-const roomRequest = {
+const sampleRooms = {
     "rooms": [
         {
         "number": 15,
@@ -27,4 +27,4 @@ const roomRequest = {
     ]
 }
 
-export { roomRequest }
+export { sampleRooms }
