@@ -35,13 +35,11 @@ const loginManager = () => {
 	})
 }
 
-
-
 // As a manager:
 	// I should be able to search for any user by name and:
-	// View their name, a list of all of their bookings, and the total amount they’ve spent
-	// Add a room booking for that user
-	// Delete any upcoming room bookings for that user (they cannot delete a booking from the past)
+		// View their name, a list of all of their bookings, and the total amount they’ve spent
+		// Add a room booking for that user
+		// Delete any upcoming room bookings for that user (they cannot delete a booking from the past)
 
 const setData = () => {
   return getAllData().then(data => {
@@ -71,12 +69,6 @@ const getBookedRooms = (currentBookings) => {
 		displayBookings(currentBookings, bookedRooms)
     })
 }
-
-// As a manager, upon logging in:
-	// I should see a dashboard page that shows me:
-		// Total Rooms Available for today’s date // a number of room NOT occupied today
-		// Total revenue for today’s date // a number total cost of all rooms booked today
-		// Percentage of rooms occupied for today’s date // number
 
 const getTodaysData = () => {
 	const today = new Date().toLocaleDateString();
