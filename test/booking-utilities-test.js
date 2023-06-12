@@ -35,11 +35,6 @@ describe('Retrieve cost', function() {
 });
 
 describe('Get date', function() {
-  // let customer1;
-
-  // beforeEach(() => {
-    
-  // })
   it('should return a given date in MM DD YYYY format to YYYY/MM/DD format', () => {
     const today = 'June 11 2023'
     const formattedDate = validateDate(today)
@@ -70,14 +65,13 @@ describe('Get date', function() {
 });
 
 describe('Find rooms', function() {
-  // let customer1;
+  let allRooms;
 
-  // beforeEach(() => {
-    
-  // })
+  beforeEach(() => {
+    allRooms = sampleRooms.rooms
+  })
   it('should return rooms that match numbers given', function() {
     const roomNumbers = [15, 24]
-    const allRooms = sampleRooms.rooms
     const foundRooms = findRooms(roomNumbers, allRooms)
 
     expect(foundRooms).to.deep.equal([
