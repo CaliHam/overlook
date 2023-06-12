@@ -120,8 +120,8 @@ const displayTotal = (cost) => {
 
 const displayAvailableRooms = (availableRooms, date, filterType) => {
 	searchResults.classList.remove('hidden')
+	filterForm.classList.remove('hidden')
 	searchResults.innerHTML = `<h2>Showing rooms available for ${dayjs(date).format('MMMM D, YYYY')}:</h2>`
-	displayFilterOption()
 	checkForError(availableRooms, date, filterType)
 	availableRooms.forEach(room => {
 		searchResults.innerHTML += `
@@ -150,10 +150,6 @@ const checkForError = (availableRooms, date, filterType) => {
 		filterForm.classList.add('hidden')
 		searchResults.innerHTML = `<h2>Sorry, there are no rooms available on ${dayjs(date).format('MMMM D, YYYY')}.<br> Please try another day.</h2>`
 	}
-}
-
-const displayFilterOption = () => {
-	filterForm.classList.remove('hidden')
 }
 
 const confirmBooking = (booking) => {
@@ -197,6 +193,5 @@ export {
 	displayTotal,
 	displayUsername,
 	displayAvailableRooms,
-	displayFilterOption,
 	confirmBooking
 }
