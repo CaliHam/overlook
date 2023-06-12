@@ -90,6 +90,25 @@ describe('Find rooms', function() {
       "bedSize": "full",
       "numBeds": 2,
       "costPerNight": 477.38
-      },])
+      }])
   });
+
+  it('should return an array of one room when one room matches', function() {
+    const foundRooms = findRooms([24], allRooms)
+
+    expect(foundRooms).to.deep.equal([{
+      "number": 24,
+      "roomType": "suite",
+      "bidet": false,
+      "bedSize": "full",
+      "numBeds": 2,
+      "costPerNight": 477.38
+      }])
+  })
+
+  it('should return an empty array when no room numbers are given', function() {
+    const foundRooms = findRooms([], allRooms)
+
+    expect(foundRooms).to.deep.equal([])
+  })
 });
