@@ -74,6 +74,7 @@ const displayUsername = (user) => {
 }
 
 const validateUser = (user, password) => {
+	checkForManager(user, password)
 	const userNum = parseInt(user.slice(8, 10))
 	if (userNum > 50 || userNum < 1 || !userNum) {
 		loginErrorField.innerText = 'Username does not exist'
@@ -85,6 +86,12 @@ const validateUser = (user, password) => {
 		dashView.classList.remove('hidden')
 		userNav.classList.remove('hidden')
 		loginUser(userNum)
+	}
+}
+
+const checkForManager = (user, pass) => {
+	if (user === 'manager' && pass === 'overlook2021') {
+		loginManager()
 	}
 }
 

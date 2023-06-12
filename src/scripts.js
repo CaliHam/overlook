@@ -29,6 +29,8 @@ const loginUser = (num) => {
 	setData();
 }
 
+
+
 const setData = () => {
   getAllData().then(data => {
     allCustomers = data[0].customers;
