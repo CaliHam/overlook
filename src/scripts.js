@@ -79,13 +79,12 @@ const getBookedRooms = (currentBookings) => {
 		// Percentage of rooms occupied for today’s date // number
 
 const getTodaysData = () => {
-	console.log('hi')
 	const today = new Date().toLocaleDateString();
 	formattedDate = validateDate(today)
 	const roomsAvailable = getOpenRooms(allRooms, allBookings, formattedDate)
 	const bookedRooms = getUnavailableRooms(allBookings, formattedDate)
 	const totalRevenue = getTotalCost(bookedRooms)
-	displayManagerView(totalRevenue, roomsAvailable, today);
+	displayManagerView(totalRevenue, roomsAvailable, bookedRooms, today);
 }
 
 const checkAvailability = (date) => {

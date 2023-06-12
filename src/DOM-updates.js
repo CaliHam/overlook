@@ -106,12 +106,13 @@ const hideAllPages = () => {
 	loginView.classList.add('hidden')
 }
 
-const displayManagerView = (totalCash, roomsReady, today) => {
+const displayManagerView = (totalCash, roomsReady, bookedRooms, today) => {
+	loginView.classList.add('hidden')
 	managerView.classList.remove('hidden');
 	todaysDate.innerText = today;
-	roomsAvailable.innerText = roomsReady;
+	roomsAvailable.innerText = roomsReady.length;
 	totalRevenue.innerText = totalCash;
-	percentOccupied.innerText = '100%'
+	percentOccupied.innerText = `${(bookedRooms/25) * 100}%`
 }
 
 const displayBookings = (bookings, rooms) => {
