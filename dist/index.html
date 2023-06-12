@@ -37,22 +37,8 @@
       </section>
       <section id="dashboard-view" class="hidden">
         <h1>My Dashboard</h1>
-        <table id="customer-bookings">
-          <thead>
-            <tr>
-              <th>Room Type</th>
-              <th>Date</th>
-              <th>Cost</th>
-            </tr>
-          </thead>
-          <tbody id="booking-info">
-            <!-- booking info goes here -->
-          </tbody>
-          <tfoot>
-            <th>Total Cost:</th>
-            <td></td>
-            <td id="total-cost"></td>
-          </tfoot>
+        <table class="customer-bookings">
+          <!-- table will appear here -->
         </table>
       </section>
       <section id="manager-dash-view" class="hidden">
@@ -74,11 +60,16 @@
             </tr>
           </table>
         </article>
-        <form id="user-search-form">
-          <label for="user-search">Search for a Customer:</label>
-          <input type="search" id="user-search" placeholder="Customer Name">
-          <button type="submit">Search</button>
-        </form>
+        <article>
+          <form id="user-search-form">
+            <label for="customer-name">Search for a Customer:</label>
+            <input type="search" id="customer-name" placeholder="Customer Name" required>
+            <button type="submit" id="search-customers">Search</button>
+          </form>
+          <table class="customer-bookings manager">
+            <!-- table will appear here -->
+          </table>
+        </article>
       </section>
       <section id="booking-view" class="hidden">
         <h1>Check-In to Unforgettable Experiences</h1>

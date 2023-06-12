@@ -1,11 +1,10 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser, loginManager } from './scripts.js'
+import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser, loginManager, searchForCustomer } from './scripts.js'
 import { validateDate } from './booking-utilities.js'
 
-const wholeTable = document.querySelector('#customer-bookings')
-const bookingTable = document.querySelector('#booking-info');
-const totalCost = document.querySelector('#total-cost')
+const bookingsTable = document.querySelector('.customer-bookings')
+const managerBookingsTable = document.querySelector('.manager')
 const userMenu = document.querySelector('.user')
 const dashView = document.querySelector('#dashboard-view')
 const bookingView = document.querySelector('#booking-view')
@@ -28,6 +27,8 @@ const roomsAvailable = document.querySelector('#rooms-avail')
 const totalRevenue = document.querySelector('#total-revenue')
 const percentOccupied = document.querySelector('#rooms-occ')
 const todaysDate = document.querySelector('#today-date')
+const customerName = document.querySelector('#customer-name')
+const searchCustomersBtn = document.querySelector('#search-customers')
 
 // Date Picker //
 const picker = datepicker(calendar)
@@ -72,6 +73,11 @@ submitFilter.addEventListener('click', (e) => {
 	filterRooms(filterType.value)
 })
 
+searchCustomersBtn.addEventListener('click', (e) => {
+	e.preventDefault()
+	searchForCustomer(customerName.value)
+})
+
 // CODE
 
 const displayUsername = (user) => {
@@ -104,27 +110,52 @@ const hideAllPages = () => {
 	dashView.classList.add('hidden')
 	bookingView.classList.add('hidden')
 	loginView.classList.add('hidden')
+	managerView.classList.add('hidden')
 }
 
 const displayManagerView = (totalCash, roomsReady, bookedRooms, today) => {
 	loginView.classList.add('hidden')
-	managerView.classList.remove('hidden');
+	managerView.classList.remove('hidden')
+	// userNav.classList.remove('hidden')
+	// userMenu.innerText = 'Manager'
 	todaysDate.innerText = today;
 	roomsAvailable.innerText = roomsReady.length;
 	totalRevenue.innerText = totalCash;
 	percentOccupied.innerText = `${(bookedRooms.length/25) * 100}%`
 }
 
+const renderBookingsTable = (tableType) => {
+	let table;
+	table = (tableType === 'manager') ? managerBookingsTable : bookingsTable
+	table.innerHTML = ''
+	table.innerHTML += `<thead>
+	<tr>
+		<th>Room Type</th>
+		<th>Date</th>
+		<th>Cost</th>
+	</tr>
+	</thead>
+	<tbody class="booking-info">
+		<!-- booking info goes here -->
+	</tbody>
+	<tfoot>
+		<th>Total Cost:</th>
+		<td></td>
+		<td class="total-cost"></td>
+	</tfoot>`
+}
+
 const displayBookings = (bookings, rooms) => {
-	if(!bookings){
-		wholeTable.innerHTML = `<th>Book some rooms the view them here!</th>`
-		return
-	}
+	// if(!bookings){
+	// 	wholeTable.innerHTML = `<th>Book some rooms the view them here!</th>`
+	// 	return
+	// }
 	bookings.sort((a, b) => {
 		const dateA = new Date(a.date);
 		const dateB = new Date(b.date);
 		return dateB - dateA;
-	});
+	});	
+	const bookingTable = document.querySelector('.booking-info');
 	bookings.forEach((booking, i)=> {
 		bookingTable.innerHTML += `
 			<tr id="${booking.id}">
@@ -136,6 +167,7 @@ const displayBookings = (bookings, rooms) => {
 }
 
 const displayTotal = (cost) => {
+	const totalCost = document.querySelector('.total-cost')
 	totalCost.innerHTML = `<b>${cost}</b>`
 }
 
@@ -212,6 +244,7 @@ const confirmBooking = (booking) => {
 
 export {
 	displayBookings,
+	renderBookingsTable,
 	displayTotal,
 	displayUsername,
 	displayManagerView,

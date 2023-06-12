@@ -6,7 +6,7 @@ import './scss/styles.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
-import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayManagerView } from './DOM-updates'
+import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayManagerView, renderBookingsTable } from './DOM-updates'
 import { getTotalCost, validateDate, findRooms, getOpenRooms, getUnavailableRooms } from './booking-utilities';
 
 let currentCustomer;
@@ -35,12 +35,6 @@ const loginManager = () => {
 	})
 }
 
-// As a manager:
-	// I should be able to search for any user by name and:
-		// View their name, a list of all of their bookings, and the total amount they’ve spent
-		// Add a room booking for that user
-		// Delete any upcoming room bookings for that user (they cannot delete a booking from the past)
-
 const setData = () => {
   return getAllData().then(data => {
     allCustomers = data[0].customers;
@@ -51,24 +45,44 @@ const setData = () => {
 
 // DASHBOARD VIEW
 
-const getCurrentBookings = (currentCustomer) => {
+const getCurrentBookings = (currentCustomer, tableType) => {
 	getData('bookings')
 		.then(response => {
 			currentBookings = response.bookings.filter(booking => booking.userID === currentCustomer.id)
-			getBookedRooms(currentBookings)
+			getBookedRooms(currentBookings, tableType)
 		})
 }
 
-const getBookedRooms = (currentBookings) => {
+const getBookedRooms = (currentBookings, tableType) => {
 	getData('rooms')
     .then(response => {
 		allRooms = response.rooms
 		const roomNumbers = currentBookings.map(booking => booking.roomNumber)
 		bookedRooms = findRooms(roomNumbers, allRooms)
+		renderBookingsTable(tableType)
 		displayTotal(getTotalCost(bookedRooms))
 		displayBookings(currentBookings, bookedRooms)
     })
 }
+
+// As a manager:
+	// I should be able to search for any user by name and:
+		// View their name, a list of all of their bookings, and the total amount they’ve spent
+			// this is just the user's dashboard...
+		// Add a room booking for that user
+			// the whole booking page... but for the manger for the user....
+		// Delete any upcoming room bookings for that user (they cannot delete a booking from the past)
+
+const searchForCustomer = (name) => {
+	if (name === '') {return}
+	currentCustomer = allCustomers.find(customer => customer.name.toLowerCase().includes(name.toLowerCase()))
+	getCurrentBookings(currentCustomer, 'manager')
+	// 2 buttons appear and user's dash
+		// Add booking for this customer
+		// Delete booking for this customer
+}
+
+
 
 const getTodaysData = () => {
 	const today = new Date().toLocaleDateString();
@@ -114,6 +128,7 @@ export {
 	bookRoom,
 	setData,
 	getCurrentBookings,
+	searchForCustomer,
 	currentCustomer,
 	newlyBookedRoom
 }
