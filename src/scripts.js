@@ -82,7 +82,8 @@ const getTodaysData = () => {
 	const today = new Date().toLocaleDateString();
 	formattedDate = validateDate(today)
 	const roomsAvailable = getOpenRooms(allRooms, allBookings, formattedDate)
-	const bookedRooms = getUnavailableRooms(allBookings, formattedDate)
+	const bookedRoomNumbers = getUnavailableRooms(allBookings, formattedDate)
+	const bookedRooms = findRooms(bookedRoomNumbers, allRooms)
 	const totalRevenue = getTotalCost(bookedRooms)
 	displayManagerView(totalRevenue, roomsAvailable, bookedRooms, today);
 }

@@ -112,7 +112,7 @@ const displayManagerView = (totalCash, roomsReady, bookedRooms, today) => {
 	todaysDate.innerText = today;
 	roomsAvailable.innerText = roomsReady.length;
 	totalRevenue.innerText = totalCash;
-	percentOccupied.innerText = `${(bookedRooms/25) * 100}%`
+	percentOccupied.innerText = `${(bookedRooms.length/25) * 100}%`
 }
 
 const displayBookings = (bookings, rooms) => {
