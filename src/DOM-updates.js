@@ -155,6 +155,7 @@ const checkForError = (availableRooms, date, filterType) => {
 const confirmBooking = (booking) => {
 	searchResults.innerHTML = `
 		<div id="confirmation">
+			<img src="./images/star-rating.png" alt="Five Stars">
 			<h2>Booking Confirmed</h2>
 			<p>Thank you ${currentCustomer.name}!</p>
 			<p>We are pleased to inform you that your reservation has been received and confirmed.</p>

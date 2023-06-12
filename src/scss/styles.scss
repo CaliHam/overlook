@@ -360,6 +360,13 @@ main {
   padding: 30px 30px 50px;
   position: relative;
 
+  img {
+    position: absolute;
+    left: 45%;
+    top: 18px;
+    height: 60px;
+  }
+
   h2 {
     color: $navy;
     text-shadow: 2px 2px 0 #9c9c9c, 4px 4px 0 #dddddd;
