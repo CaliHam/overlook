@@ -117,8 +117,6 @@ const hideAllPages = () => {
 const displayManagerView = (totalCash, roomsReady, bookedRooms, today) => {
 	loginView.classList.add('hidden')
 	managerView.classList.remove('hidden')
-	// userNav.classList.remove('hidden')
-	// userMenu.innerText = 'Manager'
 	todaysDate.innerText = today;
 	roomsAvailable.innerText = roomsReady.length;
 	totalRevenue.innerText = totalCash;
@@ -148,13 +146,11 @@ const renderBookingsTable = (tableType) => {
 
 const displayCustomer = (customer) => {
 	customerHeader.innerText = `Bookings for ${customer.name}`
+	// userNav.classList.remove('hidden')
+	// userMenu.innerText = 'Manager'
 }
 
 const displayBookings = (bookings, rooms) => {
-	// if(!bookings){
-	// 	wholeTable.innerHTML = `<th>Book some rooms the view them here!</th>`
-	// 	return
-	// }
 	bookings.sort((a, b) => {
 		const dateA = new Date(a.date);
 		const dateB = new Date(b.date);
