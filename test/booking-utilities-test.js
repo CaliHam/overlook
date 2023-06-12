@@ -5,19 +5,9 @@ import { sampleRooms } from '../src/data/sample-rooms';
 import { sampleBookings } from '../src/data/sample-bookings';
 import { getTotalCost, validateDate, findRooms } from '../src/booking-utilities';
 
-
 const expect = chai.expect;
 
-
-
-// TESTS
-
 describe('Retrieve cost', function() {
-  // let customer1;
-
-  // beforeEach(() => {
-    
-  // })
   it('should return a cost given an array of room objects', () => {
     const totalCost = getTotalCost(sampleRooms.rooms)
 
@@ -50,11 +40,32 @@ describe('Get date', function() {
   // beforeEach(() => {
     
   // })
-  it('should return a date in YYYY/MM/DD format', function() {
+  it('should return a given date in MM DD YYYY format to YYYY/MM/DD format', () => {
     const today = 'June 11 2023'
     const formattedDate = validateDate(today)
 
     expect(formattedDate).to.equal('2023/06/11')
+  });
+
+  it('should return a given date in MM-DD-YYYY format to YYYY/MM/DD format', () => {
+    const birthday = 'Apr-26-1996'
+    const formattedDate = validateDate(birthday)
+
+    expect(formattedDate).to.equal('1996/04/26')
+  });
+
+  it('should return `Invalid Date` when given incorrect input', () => {
+    const useless = 'askhdjfs'
+    const formattedDate = validateDate(useless)
+
+    expect(formattedDate).to.equal('Invalid Date')
+  });
+
+  it('should return `Invalid Date` when given no input', () => {
+    const unkown = ''
+    const formattedDate = validateDate(unkown)
+
+    expect(formattedDate).to.equal('Invalid Date')
   });
 });
 
