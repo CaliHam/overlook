@@ -7,7 +7,7 @@ import './scss/styles.scss';
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
 import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, } from './DOM-updates'
-import { getTotalCost, validateDate, findRooms } from './booking-utilities';
+import { getTotalCost, validateDate, findRooms, getOpenRooms } from './booking-utilities';
 
 let currentCustomer;
 let currentBookings;
@@ -60,9 +60,7 @@ const getBookedRooms = (currentBookings) => {
 
 const checkAvailability = (date) => {
 	formattedDate = validateDate(date)
-	const allRoomNumbers = allRooms.map(room => room.number)
-	const unavailableRooms = allBookings.filter(booking => booking.date === formattedDate).map(room => room.roomNumber)
-	const roomsReady = allRoomNumbers.filter(room => !unavailableRooms.includes(room))
+	const roomsReady = getOpenRooms(allRooms, allBookings, formattedDate)
 	availableRooms = findRooms(roomsReady, allRooms)
 	displayAvailableRooms(availableRooms, date)
 }

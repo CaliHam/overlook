@@ -3,7 +3,7 @@ import chai from 'chai';
 import { sampleCustomers } from '../src/data/sample-customers';
 import { sampleRooms } from '../src/data/sample-rooms';
 import { sampleBookings } from '../src/data/sample-bookings';
-import { getTotalCost, validateDate, findRooms } from '../src/booking-utilities';
+import { getTotalCost, validateDate, findRooms, getOpenRooms } from '../src/booking-utilities';
 
 const expect = chai.expect;
 
@@ -112,3 +112,18 @@ describe('Find rooms', function() {
     expect(foundRooms).to.deep.equal([])
   })
 });
+
+describe('Find available rooms', function() {
+  let allRooms, allBookings;
+
+  beforeEach(() => {
+    allRooms = sampleRooms.rooms
+    allBookings = sampleBookings.bookings
+  })
+  it('should return an array of room numbers that are available to book on a given date', () => {
+    const bookDate = validateDate("Jan 10 2022")
+    const openRooms = getOpenRooms(allRooms, allBookings, bookDate)
+
+    expect(openRooms).to.deep.equal([15, 24])
+  });
+})
