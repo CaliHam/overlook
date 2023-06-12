@@ -145,7 +145,11 @@ const renderBookingsTable = (tableType) => {
 }
 
 const displayCustomer = (customer) => {
-	customerHeader.innerText = `Bookings for ${customer.name}`
+	if (!customer){
+		customerHeader.innerText = `No customers found`
+	} else {
+		customerHeader.innerText = `Bookings for ${customer.name}`
+	}
 	// userNav.classList.remove('hidden')
 	// userMenu.innerText = 'Manager'
 }
