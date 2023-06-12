@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser } from './scripts.js'
+import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser, loginManager } from './scripts.js'
 import { validateDate } from './booking-utilities.js'
 
 const wholeTable = document.querySelector('#customer-bookings')
@@ -23,6 +23,11 @@ const loginBtn = document.querySelector('#login')
 const loginErrorField = document.querySelector('#login-error-field')
 const loginView = document.querySelector('#login-view')
 const userNav = document.querySelector('#user-nav')
+const managerView = document.querySelector('#manager-dash-view')
+const roomsAvailable = document.querySelector('#rooms-avail')
+const totalRevenue = document.querySelector('#total-revenue')
+const percentOccupied = document.querySelector('#rooms-occ')
+const todaysDate = document.querySelector('#today-date')
 
 // Date Picker //
 const picker = datepicker(calendar)
@@ -99,6 +104,14 @@ const hideAllPages = () => {
 	dashView.classList.add('hidden')
 	bookingView.classList.add('hidden')
 	loginView.classList.add('hidden')
+}
+
+const displayManagerView = (totalCash, roomsReady, today) => {
+	managerView.classList.remove('hidden');
+	todaysDate.innerText = today;
+	roomsAvailable.innerText = roomsReady;
+	totalRevenue.innerText = totalCash;
+	percentOccupied.innerText = '100%'
 }
 
 const displayBookings = (bookings, rooms) => {
@@ -200,6 +213,7 @@ export {
 	displayBookings,
 	displayTotal,
 	displayUsername,
+	displayManagerView,
 	displayAvailableRooms,
 	confirmBooking
 }

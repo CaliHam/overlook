@@ -6,8 +6,8 @@ import './scss/styles.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
-import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, } from './DOM-updates'
-import { getTotalCost, validateDate, findRooms, getOpenRooms } from './booking-utilities';
+import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayManagerView } from './DOM-updates'
+import { getTotalCost, validateDate, findRooms, getOpenRooms, getUnavailableRooms } from './booking-utilities';
 
 let currentCustomer;
 let currentBookings;
@@ -29,10 +29,22 @@ const loginUser = (num) => {
 	setData();
 }
 
+const loginManager = () => {
+	setData().then(data => {
+		getTodaysData()
+	})
+}
 
+
+
+// As a manager:
+	// I should be able to search for any user by name and:
+	// View their name, a list of all of their bookings, and the total amount they’ve spent
+	// Add a room booking for that user
+	// Delete any upcoming room bookings for that user (they cannot delete a booking from the past)
 
 const setData = () => {
-  getAllData().then(data => {
+  return getAllData().then(data => {
     allCustomers = data[0].customers;
     allBookings = data[1].bookings;
     allRooms = data[2].rooms;
@@ -58,6 +70,22 @@ const getBookedRooms = (currentBookings) => {
 		displayTotal(getTotalCost(bookedRooms))
 		displayBookings(currentBookings, bookedRooms)
     })
+}
+
+// As a manager, upon logging in:
+	// I should see a dashboard page that shows me:
+		// Total Rooms Available for today’s date // a number of room NOT occupied today
+		// Total revenue for today’s date // a number total cost of all rooms booked today
+		// Percentage of rooms occupied for today’s date // number
+
+const getTodaysData = () => {
+	console.log('hi')
+	const today = new Date().toLocaleDateString();
+	formattedDate = validateDate(today)
+	const roomsAvailable = getOpenRooms(allRooms, allBookings, formattedDate)
+	const bookedRooms = getUnavailableRooms(allBookings, formattedDate)
+	const totalRevenue = getTotalCost(bookedRooms)
+	displayManagerView(totalRevenue, roomsAvailable, today);
 }
 
 const checkAvailability = (date) => {
@@ -87,6 +115,7 @@ const bookRoom = (newRoom) => {
 
 export {
 	loginUser,
+	loginManager,
 	checkAvailability,
 	validateDate,
 	filterRooms,
