@@ -26,13 +26,18 @@ const findRooms = (roomNumbers, allRooms) => {
 
 const getOpenRooms = (allRooms, allBookings, formattedDate) => {
 	const allRoomNumbers = allRooms.map(room => room.number)
-	const unavailableRooms = allBookings.filter(booking => booking.date === formattedDate).map(room => room.roomNumber)
+	const unavailableRooms = getUnavailableRooms(allBookings, formattedDate)
 	return allRoomNumbers.filter(room => !unavailableRooms.includes(room))
+}
+
+const getUnavailableRooms = (allBookings, date) => {
+	return allBookings.filter(booking => booking.date === date).map(room => room.roomNumber)
 }
 
 export {
 	getTotalCost,
 	validateDate,
 	findRooms,
-	getOpenRooms
+	getOpenRooms,
+	getUnavailableRooms
 }

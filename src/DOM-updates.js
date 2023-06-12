@@ -1,11 +1,10 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser } from './scripts.js'
+import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser, loginManager, searchForCustomer } from './scripts.js'
 import { validateDate } from './booking-utilities.js'
 
-const wholeTable = document.querySelector('#customer-bookings')
-const bookingTable = document.querySelector('#booking-info');
-const totalCost = document.querySelector('#total-cost')
+const bookingsTable = document.querySelector('.customer-bookings')
+const managerBookingsTable = document.querySelector('.manager')
 const userMenu = document.querySelector('.user')
 const dashView = document.querySelector('#dashboard-view')
 const bookingView = document.querySelector('#booking-view')
@@ -23,6 +22,14 @@ const loginBtn = document.querySelector('#login')
 const loginErrorField = document.querySelector('#login-error-field')
 const loginView = document.querySelector('#login-view')
 const userNav = document.querySelector('#user-nav')
+const managerView = document.querySelector('#manager-dash-view')
+const roomsAvailable = document.querySelector('#rooms-avail')
+const totalRevenue = document.querySelector('#total-revenue')
+const percentOccupied = document.querySelector('#rooms-occ')
+const todaysDate = document.querySelector('#today-date')
+const customerName = document.querySelector('#customer-name')
+const searchCustomersBtn = document.querySelector('#search-customers')
+const customerHeader = document.querySelector('#customer-search-results')
 
 // Date Picker //
 const picker = datepicker(calendar)
@@ -67,6 +74,11 @@ submitFilter.addEventListener('click', (e) => {
 	filterRooms(filterType.value)
 })
 
+searchCustomersBtn.addEventListener('click', (e) => {
+	e.preventDefault()
+	searchForCustomer(customerName.value)
+})
+
 // CODE
 
 const displayUsername = (user) => {
@@ -74,6 +86,7 @@ const displayUsername = (user) => {
 }
 
 const validateUser = (user, password) => {
+	checkForManager(user, password)
 	const userNum = parseInt(user.slice(8, 10))
 	if (userNum > 50 || userNum < 1 || !userNum) {
 		loginErrorField.innerText = 'Username does not exist'
@@ -88,22 +101,66 @@ const validateUser = (user, password) => {
 	}
 }
 
+const checkForManager = (user, pass) => {
+	if (user === 'manager' && pass === 'overlook2021') {
+		loginManager()
+	}
+}
+
 const hideAllPages = () => {
 	dashView.classList.add('hidden')
 	bookingView.classList.add('hidden')
 	loginView.classList.add('hidden')
+	managerView.classList.add('hidden')
+}
+
+const displayManagerView = (totalCash, roomsReady, bookedRooms, today) => {
+	loginView.classList.add('hidden')
+	managerView.classList.remove('hidden')
+	todaysDate.innerText = today;
+	roomsAvailable.innerText = roomsReady.length;
+	totalRevenue.innerText = totalCash;
+	percentOccupied.innerText = `${(bookedRooms.length/25) * 100}%`
+}
+
+const renderBookingsTable = (tableType) => {
+	let table;
+	table = (tableType === 'manager') ? managerBookingsTable : bookingsTable
+	table.innerHTML = ''
+	table.innerHTML += `<thead>
+	<tr>
+		<th>Room Type</th>
+		<th>Date</th>
+		<th>Cost</th>
+	</tr>
+	</thead>
+	<tbody class="booking-info">
+		<!-- booking info goes here -->
+	</tbody>
+	<tfoot>
+		<th>Total Cost:</th>
+		<td></td>
+		<td class="total-cost"></td>
+	</tfoot>`
+}
+
+const displayCustomer = (customer) => {
+	if (!customer){
+		customerHeader.innerText = `No customers found`
+	} else {
+		customerHeader.innerText = `Bookings for ${customer.name}`
+	}
+	// userNav.classList.remove('hidden')
+	// userMenu.innerText = 'Manager'
 }
 
 const displayBookings = (bookings, rooms) => {
-	if(!bookings){
-		wholeTable.innerHTML = `<th>Book some rooms the view them here!</th>`
-		return
-	}
 	bookings.sort((a, b) => {
 		const dateA = new Date(a.date);
 		const dateB = new Date(b.date);
 		return dateB - dateA;
-	});
+	});	
+	const bookingTable = document.querySelector('.booking-info');
 	bookings.forEach((booking, i)=> {
 		bookingTable.innerHTML += `
 			<tr id="${booking.id}">
@@ -115,6 +172,7 @@ const displayBookings = (bookings, rooms) => {
 }
 
 const displayTotal = (cost) => {
+	const totalCost = document.querySelector('.total-cost')
 	totalCost.innerHTML = `<b>${cost}</b>`
 }
 
@@ -155,6 +213,7 @@ const checkForError = (availableRooms, date, filterType) => {
 const confirmBooking = (booking) => {
 	searchResults.innerHTML = `
 		<div id="confirmation">
+			<img src="./images/star-rating.png" alt="Five Stars">
 			<h2>Booking Confirmed</h2>
 			<p>Thank you ${currentCustomer.name}!</p>
 			<p>We are pleased to inform you that your reservation has been received and confirmed.</p>
@@ -190,8 +249,11 @@ const confirmBooking = (booking) => {
 
 export {
 	displayBookings,
+	renderBookingsTable,
 	displayTotal,
 	displayUsername,
+	displayCustomer,
+	displayManagerView,
 	displayAvailableRooms,
 	confirmBooking
 }
