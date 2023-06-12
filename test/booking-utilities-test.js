@@ -114,16 +114,32 @@ describe('Find rooms', function() {
 });
 
 describe('Find available rooms', function() {
-  let allRooms, allBookings;
+  let allRooms, allBookings, allBooked;
 
   beforeEach(() => {
     allRooms = sampleRooms.rooms
     allBookings = sampleBookings.bookings
+    allBooked = sampleBookings.bookingsFull
   })
+
   it('should return an array of room numbers that are available to book on a given date', () => {
     const bookDate = validateDate("Jan 10 2022")
     const openRooms = getOpenRooms(allRooms, allBookings, bookDate)
 
     expect(openRooms).to.deep.equal([15, 24])
+  });
+
+  it('should return an array of different room numbers that are available to book on a different date', () => {
+    const bookDate = validateDate("4-22-2022")
+    const openRooms = getOpenRooms(allRooms, allBookings, bookDate)
+
+    expect(openRooms).to.deep.equal([24, 12])
+  });
+
+  it('should return an empty array if no dates are available to book on a given date', () => {
+    const bookDate = validateDate("2022/01/24")
+    const openRooms = getOpenRooms(allRooms, allBooked, bookDate)
+
+    expect(openRooms).to.deep.equal([])
   });
 })
