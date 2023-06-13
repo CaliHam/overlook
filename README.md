@@ -9,7 +9,7 @@
 * [Technologies Used](#Technologies-Used)
 
 ## Description
-Welcome to the Overlook Hotel managemet tool! With our site, users and managers will be able to manage room bookings and calculate customer bills.
+Welcome to the Overlook Hotel managemet tool! With our site, users and managers will be able to manage room bookings and calculate customer bills. This project was completed over the course of 7 days and served as the Final Solo Project for Turing Module 2.
 
 ## Learning Goals
 - Use object and array prototype methods to perform data manipulation
@@ -36,6 +36,11 @@ Welcome to the Overlook Hotel managemet tool! With our site, users and managers 
 - Managers can also search for a customer by name to view their current bookings.
 
 
+#### Future Additions
+- Managers will be able to book a room for a customer
+- Managers can delete any upcoming booking for a customer
+- Add dark mode functionality so that when a user clicks an indicated button, the site's palette shifts.
+
 ## Installation
 1. `fork` this repository and/or `clone` it to local
 1. Once you have cloned the repo, change (cd) into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
@@ -49,7 +54,7 @@ Welcome to the Overlook Hotel managemet tool! With our site, users and managers 
 ## Contributers
 - [Calli Herrmann](https://github.com/CaliHam/)
 
-### With additional help from:
+#### With additional help from:
 - [Elise Jones](https://github.com/Elise-Jones/) (reviewing pull-requests)
 - [Jeremiah Black](https://github.com/jeremiahblackol) (project manager)
 
