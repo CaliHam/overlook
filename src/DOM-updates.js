@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
-import '../dist/images/sad-server.png'
 import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser, loginManager, searchForCustomer } from './scripts.js'
 import { validateDate } from './booking-utilities.js'
 import { getUser } from './apiCalls';
