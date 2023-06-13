@@ -1,13 +1,12 @@
 import chai from 'chai';
 
-import { sampleCustomers } from '../src/data/sample-customers';
 import { sampleRooms } from '../src/data/sample-rooms';
 import { sampleBookings } from '../src/data/sample-bookings';
-import { getTotalCost, validateDate, findRooms, getOpenRooms } from '../src/booking-utilities';
+import { getTotalCost, validateDate, findRooms, getUnavailableRooms, getOpenRooms } from '../src/booking-utilities';
 
 const expect = chai.expect;
 
-describe('Retrieve cost', function() {
+describe('Retrieve cost', () => {
   it('should return a cost given an array of room objects', () => {
     const totalCost = getTotalCost(sampleRooms.rooms)
 
@@ -34,7 +33,7 @@ describe('Retrieve cost', function() {
   })
 });
 
-describe('Get date', function() {
+describe('Get date', () => {
   it('should return a given date in MM DD YYYY format to YYYY/MM/DD format', () => {
     const today = 'June 11 2023'
     const formattedDate = validateDate(today)
@@ -64,13 +63,13 @@ describe('Get date', function() {
   });
 });
 
-describe('Find rooms', function() {
+describe('Find rooms', () => {
   let allRooms;
 
   beforeEach(() => {
     allRooms = sampleRooms.rooms
   })
-  it('should return rooms that match numbers given', function() {
+  it('should return rooms that match numbers given', () => {
     const roomNumbers = [15, 24]
     const foundRooms = findRooms(roomNumbers, allRooms)
 
@@ -93,7 +92,7 @@ describe('Find rooms', function() {
       }])
   });
 
-  it('should return an array of one room when one room matches', function() {
+  it('should return an array of one room when one room matches', () => {
     const foundRooms = findRooms([24], allRooms)
 
     expect(foundRooms).to.deep.equal([{
@@ -106,14 +105,45 @@ describe('Find rooms', function() {
       }])
   })
 
-  it('should return an empty array when no room numbers are given', function() {
+  it('should return an empty array when no room numbers are given', () => {
     const foundRooms = findRooms([], allRooms)
 
     expect(foundRooms).to.deep.equal([])
   })
 });
 
-describe('Find available rooms', function() {
+describe('Find Unavailable rooms', () => {
+  let allRooms, allBookings, allBooked;
+
+  beforeEach(() => {
+    allRooms = sampleRooms.rooms
+    allBookings = sampleBookings.bookings
+    allBooked = sampleBookings.bookingsFull
+  })
+
+  it('should return an array of room numbers that are booked on a given date', () => {
+    const bookDate = validateDate("Jan 10 2022")
+    const bookedRooms = getUnavailableRooms(allBookings, bookDate)
+
+    expect(bookedRooms).to.deep.equal([12])
+  });
+
+  it('should return an array of different room numbers that are booked on a different date', () => {
+    const bookDate = validateDate("1-24-2022")
+    const bookedRooms = getUnavailableRooms(allBooked, bookDate)
+
+    expect(bookedRooms).to.deep.equal([15, 24, 12])
+  });
+
+  it('should return an empty array if there are no rooms booked a given date', () => {
+    const bookDate = validateDate("2022/04/26")
+    const bookedRooms = getUnavailableRooms(allBookings, bookDate)
+
+    expect(bookedRooms).to.deep.equal([])
+  });
+})
+
+describe('Find available rooms', () => {
   let allRooms, allBookings, allBooked;
 
   beforeEach(() => {

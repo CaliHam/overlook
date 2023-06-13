@@ -24,14 +24,14 @@ const findRooms = (roomNumbers, allRooms) => {
 	}, [])
 }
 
+const getUnavailableRooms = (allBookings, date) => {
+	return allBookings.filter(booking => booking.date === date).map(room => room.roomNumber)
+}
+
 const getOpenRooms = (allRooms, allBookings, formattedDate) => {
 	const allRoomNumbers = allRooms.map(room => room.number)
 	const unavailableRooms = getUnavailableRooms(allBookings, formattedDate)
 	return allRoomNumbers.filter(room => !unavailableRooms.includes(room))
-}
-
-const getUnavailableRooms = (allBookings, date) => {
-	return allBookings.filter(booking => booking.date === date).map(room => room.roomNumber)
 }
 
 export {
