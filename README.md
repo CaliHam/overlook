@@ -28,13 +28,13 @@ Welcome to the Overlook Hotel managemet tool! With our site, users and managers 
 ![Dashboard Preview](dist/gifs/user-dash.gif)
 
 - User can navigate to the "New Booking" page and search for an available room to book while also having the option to filter the rooms by type. Once a room is booked, they will receive a confirmation and can see their dashboard has been updated.
-<!-- ![New Booking Preview](dist/gifs/user-booking.gif) -->
+![New Booking Preview](dist/gifs/user-booking.gif)
 
 - Managers can login to view the stats for the current date.
 ![Manager Login Preview](dist/gifs/login-manager.gif)
 
 - Managers can also search for a customer by name to view their current bookings.
-<!-- ![Manager Search Preview](dist/gifs/manager-search.gif) -->
+![Manager Search Preview](dist/gifs/manager-search.gif)
 
 ## Installation
 1. `fork` this repository and/or `clone` it to local
