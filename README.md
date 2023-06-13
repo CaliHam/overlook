@@ -34,7 +34,7 @@ Welcome to the Overlook Hotel managemet tool! With our site, users and managers 
 ![Manager Login Preview](dist/gifs/login-manager.gif)
 
 - Managers can also search for a customer by name to view their current bookings.
-
+![Manager Search Preview](dist/gifs/login-manager.gif)
 
 ## Installation
 1. `fork` this repository and/or `clone` it to local
