@@ -60,7 +60,7 @@ Welcome to the Overlook Hotel managemet tool! With our site, users and managers 
 
 ## Technologies Used
 - JavaScript (ES6)
-- CSS
+- SCSS
 - HTML
 - Mocha
 - Chai
