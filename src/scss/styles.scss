@@ -212,7 +212,7 @@ main {
   }
 }
 
-.customer-bookings{
+.customer-bookings {
   border-collapse: collapse;
   font-size: 0.9em;
   width: 550px;
@@ -250,6 +250,13 @@ main {
     border-top: 2px solid $red;
     border-bottom: 2px solid $red;
   }
+}
+
+#manager-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #manager-table {
@@ -321,6 +328,8 @@ main {
 #user-search-form {
   height: 20px;
   margin-top: 50px;
+  width: fit-content;
+  align-self: center;
 }
 
 #results {
@@ -457,10 +466,34 @@ main {
 }
 
 // Media Queries
+@media(max-width: 1000px) {
+  #manager-search {
+    width: 50%;
+  }
+  .manager {
+    width: 100%;
+  }
+}
 
 @media(max-width: 900px) {
   #booking-nav {
     flex-direction: column;
+  }
+}
+
+@media(max-width: 800px) {
+  #manager-dash-view {
+    flex-direction: column;
+  }
+  #manager-search {
+    width: auto;
+  }
+  .manager {
+    width: 80%;
+
+    tbody {
+      height: 200px;
+    }
   }
 }
 
