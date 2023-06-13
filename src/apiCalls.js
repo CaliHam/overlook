@@ -13,7 +13,6 @@ const getData = (data) => {
 const getUser = (num) => {
     return fetch(`http://localhost:3001/api/v1/customers/${num}`)
     .then(response => response.json())
-    .catch(err => console.log(err))
 }
 
 const postData = (data) => {

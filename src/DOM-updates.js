@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import datepicker from 'js-datepicker';
 import { checkAvailability, filterRooms, bookRoom, getCurrentBookings, currentCustomer, newlyBookedRoom, loginUser, loginManager, searchForCustomer } from './scripts.js'
 import { validateDate } from './booking-utilities.js'
+import { getUser } from './apiCalls';
 
 const bookingsTable = document.querySelector('.customer-bookings')
 const managerBookingsTable = document.querySelector('.manager')
@@ -35,6 +36,14 @@ const customerHeader = document.querySelector('#customer-search-results')
 const picker = datepicker(calendar)
 
 // EVENT LISTENERS
+window.addEventListener('load', () => {
+	getUser('20')
+	.catch(error => {
+		if (error){
+			loginView.innerHTML = `<h2>Sorry, our servers are down. Please try again later!</h2>`
+		}
+	})
+})
 
 passwordField.addEventListener('keydown', (e) => {
 	if (e.key === "Enter") {
