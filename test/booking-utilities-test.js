@@ -3,7 +3,7 @@ import chai from 'chai';
 import { sampleCustomers } from '../src/data/sample-customers';
 import { sampleRooms } from '../src/data/sample-rooms';
 import { sampleBookings } from '../src/data/sample-bookings';
-import { getTotalCost, validateDate, findRooms, getOpenRooms } from '../src/booking-utilities';
+import { getTotalCost, validateDate, findRooms, getUnavailableRooms, getOpenRooms } from '../src/booking-utilities';
 
 const expect = chai.expect;
 
@@ -112,6 +112,37 @@ describe('Find rooms', function() {
     expect(foundRooms).to.deep.equal([])
   })
 });
+
+describe('Find Unavailable rooms', function() {
+  let allRooms, allBookings, allBooked;
+
+  beforeEach(() => {
+    allRooms = sampleRooms.rooms
+    allBookings = sampleBookings.bookings
+    allBooked = sampleBookings.bookingsFull
+  })
+
+  it('should return an array of room numbers that are booked on a given date', () => {
+    const bookDate = validateDate("Jan 10 2022")
+    const bookedRooms = getUnavailableRooms(allBookings, bookDate)
+
+    expect(bookedRooms).to.deep.equal([12])
+  });
+
+  it('should return an array of different room numbers that are booked on a different date', () => {
+    const bookDate = validateDate("1-24-2022")
+    const bookedRooms = getUnavailableRooms(allBooked, bookDate)
+
+    expect(bookedRooms).to.deep.equal([15, 24, 12])
+  });
+
+  it('should return an empty array if there are no rooms booked a given date', () => {
+    const bookDate = validateDate("2022/04/26")
+    const bookedRooms = getUnavailableRooms(allBookings, bookDate)
+
+    expect(bookedRooms).to.deep.equal([])
+  });
+})
 
 describe('Find available rooms', function() {
   let allRooms, allBookings, allBooked;
