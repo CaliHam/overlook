@@ -156,6 +156,7 @@ const renderBookingsTable = (tableType) => {
 const displayCustomer = (customer) => {
 	if (!customer){
 		customerHeader.innerText = `No customers found`
+		managerBookingsTable.innerHTML = ''
 	} else {
 		customerHeader.innerText = `Bookings for ${customer.name}`
 	}
