@@ -42,6 +42,7 @@ body {
 
 header {
   width: 80%;
+  min-height: 135px;
   margin-top: 20px;
   display: flex;
   flex-direction: row;
@@ -213,7 +214,6 @@ main {
 
 .customer-bookings{
   border-collapse: collapse;
-  margin-bottom: 60px;
   font-size: 0.9em;
   width: 550px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -458,7 +458,24 @@ main {
 
 // Media Queries
 
+@media(max-width: 900px) {
+  #booking-nav {
+    flex-direction: column;
+  }
+}
 
+@media(max-width: 600px) {
+  #login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 140px;
+  }
+
+  .customer-bookings {
+    width: 90%;
+  }
+}
 
 
 // HIDDEN
