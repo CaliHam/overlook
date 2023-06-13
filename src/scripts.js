@@ -1,9 +1,4 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
 import './scss/styles.scss';
-
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import '../dist/images/Overlook-logo.png'
 import { getData, getUser, postData, getAllData } from './apiCalls';
 import { displayBookings, displayTotal, displayUsername, displayAvailableRooms, displayManagerView, renderBookingsTable, displayCustomer } from './DOM-updates'
@@ -42,8 +37,6 @@ const setData = () => {
     allRooms = data[2].rooms;
   });
 };
-
-// DASHBOARD VIEW
 
 const getCurrentBookings = (currentCustomer, tableType) => {
 	getData('bookings')
