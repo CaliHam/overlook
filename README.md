@@ -22,13 +22,16 @@ Welcome to the Overlook Hotel managemet tool! With our site, users and managers 
 
 ## Features
 - Upon page load, you are greeted with a login screen to retrieve their individual data. 
-![Login Screen Preview](src/gifs/Home-Screen.gif)
+![Login Screen Preview](dist/gifs/login-user.gif)
 
 - Once a user is logged in, they will see their dashboard with a table of their bookings and the total amount they've spent at the hotel.
+![Dashboard Preview](dist/gifs/user-dash.gif)
 
-- User can navigate to the "New Booking" page and search for an available room to book while also having the option to filter the rooms by type.
+- User can navigate to the "New Booking" page and search for an available room to book while also having the option to filter the rooms by type. Once a room is booked, they will receive a confirmation and can see their dashboard has been updated.
+![New Booking Preview](dist/gifs/user-booking.gif)
 
 - Managers can login to view the stats for the current date.
+![Manager Login Preview](dist/gifs/login-manager.gif)
 
 - Managers can also search for a customer by name to view their current bookings.
 
